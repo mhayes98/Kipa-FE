@@ -1,4 +1,4 @@
-import LoginModal from "../components/LoginModal";
+import LoginModal from "../components/Modal/LoginModal";
 import { useState } from "react";
 
 function App() {
