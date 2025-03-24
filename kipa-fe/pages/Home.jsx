@@ -1,12 +1,13 @@
-import { react } from 'react';
-import { useState } from 'react';
-import { LoginModal } from '../components/Modal/LoginModal';
+import React from "react";
+import { LoginModal } from '../components/Modal/LoginModal.jsx';
+import { LoginModalContextProvider  } from '../context/LoginModalContext.jsx';
 
 function Home() {
     return (
         <>
-            <h1>Welcome to Kipa!</h1>
-            <LoginModal />
+            <LoginModalContextProvider>
+                 <LoginModal />
+            </LoginModalContextProvider>
         </>
     );
 }

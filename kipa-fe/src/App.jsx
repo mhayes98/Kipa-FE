@@ -1,9 +1,13 @@
-import LoginModal from "../components/Modal/LoginModal";
-import { useState } from "react";
+import { LoginModal } from '../components/Modal/LoginModal.jsx';
+import { LoginButton } from '../components/Button/LoginButton.jsx';
+import { LoginModalContextProvider  } from '../context/LoginModalContext.jsx';
 
 function App() {
   return (
-    <LoginModal />
+    <LoginModalContextProvider>
+      <LoginButton />
+      <LoginModal />
+    </LoginModalContextProvider>
   );
 }
 
