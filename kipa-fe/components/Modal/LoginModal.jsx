@@ -2,12 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { LoginButton } from "../Button/LoginButton";
+import { UserAuthContextProvider } from "../../context/UserAuthContext";
 
 // Refactor to include: close button in the top right, pressing escape to close
 // Potentially include clicking outside of the modal to close as well
 
 function LoginModal() {
     const { visibility, toggleVisibility } = useLoginModalContext(); // True = visible, False = hidden
+    const { setAuthenticatedTrue } = useUserAuthContext();
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
 
@@ -33,6 +35,9 @@ function LoginModal() {
         
         if (response.ok) {
           console.log("Login successful");
+          setAuthenticatedTrue();
+          toggleVisibility();
+          // Also set username? See if needed in Auth or another context
         } else {
           console.log("Login failed");
         }
