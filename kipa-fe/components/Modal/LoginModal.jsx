@@ -2,14 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { LoginButton } from "../Button/LoginButton";
-import { UserAuthContextProvider } from "../../context/UserAuthContext";
+import { useUserAuthContext } from "../../context/UserAuthContext";
 
 // Refactor to include: close button in the top right, pressing escape to close
 // Potentially include clicking outside of the modal to close as well
 
 function LoginModal() {
+    const { toggleAuthenticated, setUsernameValue } = useUserAuthContext();
     const { visibility, toggleVisibility } = useLoginModalContext(); // True = visible, False = hidden
-    const { setAuthenticatedTrue } = useUserAuthContext();
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
 
@@ -32,12 +32,13 @@ function LoginModal() {
           }),
           credentials: "include"
         });
-        
+
         if (response.ok) {
-          console.log("Login successful");
-          setAuthenticatedTrue();
+          const data = await response.json();
+          setUsernameValue(data.username);
+          toggleAuthenticated();
           toggleVisibility();
-          // Also set username? See if needed in Auth or another context
+          console.log(data.message);
         } else {
           console.log("Login failed");
         }
@@ -60,11 +61,11 @@ function LoginModal() {
               value={username} required
               onChange={e => setUsername(e.target.value)}>
             </input>
-  
+
             <label htmlFor="password"><b>Password</b></label>
             <input 
-              type="text" 
-              placeholder="********" 
+              type="password" 
+              placeholder="**********" 
               value={password} required
               onChange={e => setPassword(e.target.value)}>
             </input>
@@ -76,6 +77,5 @@ function LoginModal() {
       </>
     );
   }
-
 
 export { LoginModal };

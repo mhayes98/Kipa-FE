@@ -12,19 +12,14 @@ function LoginModalContextProvider({ children }) {
         setVisibility(visibility => visibility ? false : true);
     };
 
-    const setVisibilityTrue = () => {
-        setVisibility(true);
-    };
-
-    const setVisibilityFalse = () => {
-        setVisibility(false);
-    }
-
+    console.log("LoginModalContextProvider rendered", visibility);
     return (
         <LoginModalContext.Provider value={{ visibility, toggleVisibility }}>
             {children}
         </LoginModalContext.Provider>
     );
+
+
 }
 
 function useLoginModalContext() {
