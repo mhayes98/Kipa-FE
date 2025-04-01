@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { LoginButton } from "../Button/LoginButton";
 import { useUserAuthContext } from "../../context/UserAuthContext";
+import { authorizeLoginAttempt } from "../../services/UserServices";
 
 // Refactor to include: close button in the top right, pressing escape to close
 // Potentially include clicking outside of the modal to close as well
@@ -19,35 +20,16 @@ function LoginModal() {
       console.log("Password: ", password);
     };
 
-    const postLogin = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            username: username,
-            password: password
-          }),
-          credentials: "include"
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setUsernameValue(data.username);
-          toggleAuthenticated();
-          toggleVisibility();
-          console.log(data.message);
-        } else {
-          console.log("Login failed");
-        }
-      } catch (error) {
-        console.error("Error: ", error);
+    const handleLogin = async () => {
+      const data = await authorizeLoginAttempt(username, password);
+      if (data) {
+        setUsernameValue(data.username);
+        toggleAuthenticated();
+        toggleVisibility();
+        console.log(data.message);
       }
     }
 
-    // Visibility needs to be set to false if user login is successful
 
     return (
       <>
@@ -70,7 +52,7 @@ function LoginModal() {
               onChange={e => setPassword(e.target.value)}>
             </input>
 
-            <button type="button" onClick={postLogin}>Login</button>
+            <button type="button" onClick={handleLogin}>Login</button>
             <button onClick={toggleVisibility}>Close</button>
           </form>
         )}

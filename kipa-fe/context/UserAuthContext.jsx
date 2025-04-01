@@ -13,20 +13,14 @@ function UserAuthContextProvider({ children }) {
     const [username, setUsername] = useState("");
 
     const toggleAuthenticated = () => {
-        console.log("Toggling authenticated state");
         setAuthenticated(authenticated => authenticated ? false : true);
     }
 
     const setUsernameValue = (value) => {
-        console.log("Setting username to:", value);
         if (value) {
             setUsername(value);
-        } else {
-            console.warn("Attempted to set username with empty value");
         }
     }
-    
-    console.log("UserAuthContextProvider rendered", username, authenticated);
         
     return (
         <UserAuthContext.Provider value={{ authenticated, toggleAuthenticated, username, setUsernameValue }}>

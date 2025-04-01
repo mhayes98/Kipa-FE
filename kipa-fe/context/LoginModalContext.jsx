@@ -12,7 +12,6 @@ function LoginModalContextProvider({ children }) {
         setVisibility(visibility => visibility ? false : true);
     };
 
-    console.log("LoginModalContextProvider rendered", visibility);
     return (
         <LoginModalContext.Provider value={{ visibility, toggleVisibility }}>
             {children}
