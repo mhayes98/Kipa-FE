@@ -33,13 +33,13 @@ export const registerNewUser = async (username, password, email) => {
             },
             body: JSON.stringify({
                 username: username,
-                password: password,
+                passwordDTO: password,
                 email: email
             }),
             credentials: "include"
         })
         
-        // 404 error
+        // 400 error (bad request)
         // make validate function in component for field lengths
         if (!response.ok) {
             const data = await response.json();
