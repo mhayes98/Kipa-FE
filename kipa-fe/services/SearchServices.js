@@ -1,6 +1,6 @@
 export const searchDiscogsByMaster = async (searchQuery) => {
     try {
-        const response = await fetch(`http://localhost:8080/search/master?q=${searchQuery}&type=master`, {
+        const response = await fetch(`http://localhost:8080/search/master?q=${searchQuery}&type=master&per_page=20`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,4 +18,25 @@ export const searchDiscogsByMaster = async (searchQuery) => {
         console.error('Error fetching data from Discogs:', error);
     }
     console.log("TEST");
+}
+
+export const searchDiscogsByArtist = async (searchQuery) => {
+    try {
+        const response = await fetch(`http://localhost:8080/search/artist?q=${searchQuery}&type=artist&per_page=10`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            console.error('Error fetching data from Discogs:', response.statusText);
+        }
+        else {
+            const data = await response.json();
+            console.log('Data fetched from Discogs:', data);
+        }
+    }
+    catch (error){
+        console.error('Error fetching data from Discogs:', error);
+    }
 }
