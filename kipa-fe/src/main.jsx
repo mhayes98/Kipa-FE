@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import Home from '../pages/Home.jsx'
 import Register from '../pages/Register.jsx'
+import Search from '../pages/Search.jsx';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/search",
+    element: <Search />,
   }
 ])
 
