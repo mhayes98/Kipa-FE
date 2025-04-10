@@ -11,13 +11,13 @@ export const searchDiscogsByMaster = async (searchQuery) => {
         }
         else {
             const data = await response.json();
-            console.log('Data fetched from Discogs:', data);
+            //console.log('Data fetched from Discogs:', data);
+            return data;
         }
     }
     catch (error){
         console.error('Error fetching data from Discogs:', error);
     }
-    console.log("TEST");
 }
 
 export const searchDiscogsByArtist = async (searchQuery) => {
@@ -33,7 +33,7 @@ export const searchDiscogsByArtist = async (searchQuery) => {
         }
         else {
             const data = await response.json();
-            console.log('Data fetched from Discogs:', data);
+            return data;
         }
     }
     catch (error){
