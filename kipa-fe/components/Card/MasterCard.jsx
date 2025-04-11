@@ -4,9 +4,9 @@ function MasterCard(master) {
     //console.log("TESTING MASTERCARD:" + master.title);
     return (
         <>
-            <h1>{master.title}</h1>
+            <h1>{master.artist}</h1>
             <img src={master.thumb}/>
-            <h4>{master.genre} - {master.year}</h4>
+            <h4>{master.title} - {master.year}</h4>
         </>
     );
 
