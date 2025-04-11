@@ -6,39 +6,22 @@ import MasterCard from '/components/card/MasterCard.jsx'
 
 function SearchBar() {
     const [searchQuery, setSearchQuery] = React.useState('');
-    const [searchResults, setSearchResults] = React.useState([]);
-
-    /*
-    const handleSearch = async (event) => {
-        event.preventDefault();
-        try {
-            const results = await searchDiscogsByMaster(searchQuery);
-            setSearchResults(results);
-        } catch (error) {
-            console.error('Error fetching search results:', error);
-        }
-    };
-    */
+    const [masterSearchResults, setMasterSearchResults] = React.useState([]);
+    const [artistSearchResults, setArtistSearchResults] = React.useState([]);
 
     const handleSearch = async (event) => {
         event.preventDefault();
         try {
             if (event.target.artist.checked) {
-                const artist = await processArtistSearchResponse(searchQuery);
-                //MasterCard(artist);
-                //setSearchResults(artist);
+                setArtistSearchResults(processArtistSearchResponse(searchQuery));
             }
-            const master = await processMasterSearchResponse(searchQuery);
-            setSearchResults(master);
+            setMasterSearchResults(processMasterSearchResponse(searchQuery));
         }
         catch (error) {
             console.error('Error fetching search results:', error);
         }
     }
 
-    
-
-    // Used values : genre, style, thumb, title, year
 
     return (
         <div className="search-bar">
@@ -53,7 +36,7 @@ function SearchBar() {
                 <input type="checkbox" id="artist" name="artist" value="artist" />
                 <label htmlFor="artist">Include artists</label>
             </form>
-            {searchResults.length > 0 && (
+            {masterSearchResults.length > 0 && (
                 <ul>
                     {searchResults.map((result) => (
                         <li key={result.title}>{result.title} + {result.genre}</li>
