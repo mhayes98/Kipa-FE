@@ -1,6 +1,6 @@
 import React from 'react';
 import { searchDiscogsByMaster, searchDiscogsByArtist,
-    processMasterSearchResponse,  processArtistSearchResponse } from '../../services/SearchServices.js';
+        processMasterSearchResponse,  processArtistSearchResponse } from '../../services/SearchServices.js';
 import MasterCard from '/components/card/MasterCard.jsx' 
 
 
@@ -13,15 +13,14 @@ function SearchBar() {
         event.preventDefault();
         try {
             if (event.target.artist.checked) {
-                setArtistSearchResults(processArtistSearchResponse(searchQuery));
+                setArtistSearchResults(await processArtistSearchResponse(searchQuery));
             }
-            setMasterSearchResults(processMasterSearchResponse(searchQuery));
+            setMasterSearchResults(await processMasterSearchResponse(searchQuery));
         }
         catch (error) {
             console.error('Error fetching search results:', error);
         }
     }
-
 
     return (
         <div className="search-bar">
@@ -38,7 +37,7 @@ function SearchBar() {
             </form>
             {masterSearchResults.length > 0 && (
                 <ul>
-                    {searchResults.map((result) => (
+                    {masterSearchResults.map((result) => (
                         <li key={result.title}>{result.title} + {result.genre}</li>
                     ))}
                 </ul>
