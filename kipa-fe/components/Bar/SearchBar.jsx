@@ -42,6 +42,12 @@ function SearchBar() {
                     ))}
                 </ul>
             )}
+            {masterSearchResults.length > 0 && (
+                <MasterCard {...masterSearchResults[0]} />
+            )}
+            {masterSearchResults.length > 0 && (
+                <MasterCard {...masterSearchResults[1]} />
+            )}
         </div>
     );
 }
