@@ -1,43 +1,8 @@
 import React from 'react';
-import { searchDiscogsByMaster, searchDiscogsByArtist } from '../../services/SearchServices.js';
+import { searchDiscogsByMaster, searchDiscogsByArtist,
+    processMasterSearchResponse,  processArtistSearchResponse } from '../../services/SearchServices.js';
+import MasterCard from '/components/card/MasterCard.jsx' 
 
-
-function callMasterSearch(searchQuery){
-    return searchDiscogsByMaster(searchQuery).then((response) => {
-        console.log("MASTER RESPONSE: ", response);
-        if (response) {
-            return response.map((master) => {
-                return {
-                    title: master.title,
-                    year: master.year,
-                    thumb: master.thumb,
-                    genre: master.genre,
-                    style: master.style
-                };
-            });
-        } else {
-            throw new Error('Invalid response format');
-        }
-    });
-}
-
-function callArtistSearch(searchQuery){
-    return searchDiscogsByArtist(searchQuery).then((response) => {
-        console.log("ARTIST RESPONSE: ", response);
-        if (response) {
-            return response.map((artist) => {
-                return {
-                    title: artist.title,
-                    thumb: artist.thumb,
-                    genre: artist.genre,
-                    style: artist.style
-                };
-            });
-        } else {
-            throw new Error('Invalid response format');
-        }
-    });
-}
 
 function SearchBar() {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -59,10 +24,11 @@ function SearchBar() {
         event.preventDefault();
         try {
             if (event.target.artist.checked) {
-                const artist = await callArtistSearch(searchQuery);
+                const artist = await processArtistSearchResponse(searchQuery);
+                //MasterCard(artist);
                 //setSearchResults(artist);
             }
-            const master = await callMasterSearch(searchQuery);
+            const master = await processMasterSearchResponse(searchQuery);
             setSearchResults(master);
         }
         catch (error) {

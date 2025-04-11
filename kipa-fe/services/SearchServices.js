@@ -20,6 +20,25 @@ export const searchDiscogsByMaster = async (searchQuery) => {
     }
 }
 
+export async function processMasterSearchResponse(searchQuery){
+    return searchDiscogsByMaster(searchQuery).then((response) => {
+        console.log("MASTER RESPONSE: ", response);
+        if (response) {
+            return response.map((master) => {
+                return {
+                    title: master.title,
+                    year: master.year,
+                    thumb: master.thumb,
+                    genre: master.genre,
+                    style: master.style
+                };
+            });
+        } else {
+            throw new Error('Invalid response format');
+        }
+    });
+}
+
 export const searchDiscogsByArtist = async (searchQuery) => {
     try {
         const response = await fetch(`http://localhost:8080/search/artist?q=${searchQuery}&type=artist&per_page=10`, {
@@ -39,4 +58,43 @@ export const searchDiscogsByArtist = async (searchQuery) => {
     catch (error){
         console.error('Error fetching data from Discogs:', error);
     }
+}
+
+
+export async function processMasterSearchResponse(searchQuery){
+    return searchDiscogsByMaster(searchQuery).then((response) => {
+        console.log("MASTER RESPONSE: ", response);
+        if (response) {
+            return response.map((master) => {
+                return {
+                    title: master.title,
+                    year: master.year,
+                    thumb: master.thumb,
+                    genre: master.genre,
+                    style: master.style
+                };
+            });
+        } else {
+            throw new Error('Invalid response format');
+        }
+    });
+}
+
+export async function processArtistSearchResponse(searchQuery){
+    return searchDiscogsByArtist(searchQuery).then((response) => {
+        console.log("ARTIST RESPONSE: ", response);
+        if (response) {
+            return response.map((artist) => {
+                return {
+                    title: artist.title,
+                    thumb: artist.thumb,
+                    genre: artist.genre,
+                    style: artist.style
+                    
+                };
+            });
+        } else {
+            throw new Error('Invalid response format');
+        }
+    });
 }
