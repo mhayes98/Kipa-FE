@@ -60,26 +60,6 @@ export const searchDiscogsByArtist = async (searchQuery) => {
     }
 }
 
-
-export async function processMasterSearchResponse(searchQuery){
-    return searchDiscogsByMaster(searchQuery).then((response) => {
-        console.log("MASTER RESPONSE: ", response);
-        if (response) {
-            return response.map((master) => {
-                return {
-                    title: master.title,
-                    year: master.year,
-                    thumb: master.thumb,
-                    genre: master.genre,
-                    style: master.style
-                };
-            });
-        } else {
-            throw new Error('Invalid response format');
-        }
-    });
-}
-
 export async function processArtistSearchResponse(searchQuery){
     return searchDiscogsByArtist(searchQuery).then((response) => {
         console.log("ARTIST RESPONSE: ", response);
