@@ -30,8 +30,9 @@ export async function processMasterSearchResponse(searchQuery){
                     // THIS NEEDS TO BE REVISITED --> BUGS ON ARTISTS LIKE WU-TANG CLAN
                     // LOOK INTO DISCOGS API VALUES
                     // MAYBE HYPHEN SEP. BY SPACES?
-                    artist: master.title.substring(0, master.title.indexOf("-")),
-                    title: master.title.substring(master.title.indexOf("-")+1),
+                    id: master.id,
+                    artist: master.artist,
+                    title: master.title.replace(artist + " - ", ""),
                     year: master.year,
                     thumb: master.thumb,
                     genre: master.genre,
