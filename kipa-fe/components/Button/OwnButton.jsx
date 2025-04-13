@@ -9,7 +9,7 @@ function OwnButton(albumID) {
 
 
     async function placeholder(albumID, username) {
-        console.log("PLACEHOLDER");
+        console.log("PLACEHOLDER --> OWN");
     }
 
     return (
