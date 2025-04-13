@@ -31,8 +31,8 @@ export async function processMasterSearchResponse(searchQuery){
                     // LOOK INTO DISCOGS API VALUES
                     // MAYBE HYPHEN SEP. BY SPACES?
                     id: master.id,
-                    artist: master.artist,
-                    title: master.title.replace(artist + " - ", ""),
+                    artist: master.title.split(" - ")[0],
+                    title: master.title.split(" - ")[1],
                     year: master.year,
                     thumb: master.thumb,
                     genre: master.genre,
