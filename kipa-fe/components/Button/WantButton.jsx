@@ -4,17 +4,17 @@ import { useUserAuthContext } from "../../context/UserAuthContext";
 
 // CLICKING THIS BUTTON WILL NEED TO TRIGER A LOGIN IF USER IS NOT AUTH
 
-function WantButton(albumID) {
+function WantButton(master) {
     const { username } = useUserAuthContext();
 
 
-    async function placeholder(albumID, username) {
+    async function placeholder(id, username) {
         console.log("PLACEHOLDER --> WANT");
     }
 
     return (
         <>
-            <button onClick={placeholder(123, username)}>Own</button>
+            <button onClick={placeholder(master.id, username)}>Own</button>
         </>
     )
 }
