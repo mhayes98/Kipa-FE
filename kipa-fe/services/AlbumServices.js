@@ -1,6 +1,8 @@
+// This retrieves the tracklist of an Album and is only called when adding an album to the database
 export const getTracklistByReleaseID = async (id) => {
+    console.log(id);
     try {
-        const response = await fetch(`https://localhost:8080/master/${id}`, {
+        const response = await fetch(`http://localhost:8080/master/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -9,10 +11,10 @@ export const getTracklistByReleaseID = async (id) => {
 
         if (!response.ok) {
             throw new Error("Fetch tracklist failed");
+        }else {
+            //const tracklist = await response.json();
+            return await response.json();
         }
-
-        const tracklist = await response.json();
-        return tracklist;
     }
     catch {
         console.error("Error: ", error);
@@ -20,10 +22,11 @@ export const getTracklistByReleaseID = async (id) => {
     }
 }
 
-export const addAlbumToDatabase = async (master) => {
-    const tracklist = getTracklistByReleaseID(master.id);
+// Getting error due to backend expecting a list for Tracklist while this is sending an object
+// Shape json or do conversion then verify
+export async function addAlbumToDatabase(master) {
     try {
-        const response = await fetch("https://localhost:8080/album" {
+        const response = await fetch("http://localhost:8080/album", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -38,17 +41,15 @@ export const addAlbumToDatabase = async (master) => {
                 year: master.year,
                 genre: master.year,
                 thumb: master.thumb,
-                tracklist: tracklist
+                tracklist: getTracklistByReleaseID(master.id)
             }),
         }) 
-
         if (!response.ok) {
             throw new Error("Adding album to DB failed.")
         }
     }
     catch (error) {
-        console.error("Erorr: ", error);
-        return null;
+        console.error("Error: ", error);
     }
 }
 
