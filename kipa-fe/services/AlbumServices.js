@@ -1,6 +1,6 @@
 // This retrieves the tracklist of an Album and is only called when adding an album to the database
 export const getTracklistByReleaseID = async (id) => {
-    console.log(id);
+    console.log("ID", id);
     try {
         const response = await fetch(`http://localhost:8080/master/${id}`, {
             method: "GET",
@@ -12,8 +12,9 @@ export const getTracklistByReleaseID = async (id) => {
         if (!response.ok) {
             throw new Error("Fetch tracklist failed");
         }else {
-            //const tracklist = await response.json();
-            return await response.json();
+            const tracklist = await response.json();
+            console.log(tracklist);
+            return tracklist;
         }
     }
     catch {
@@ -21,10 +22,11 @@ export const getTracklistByReleaseID = async (id) => {
         return null;
     }
 }
-
+console.log(getTracklistByReleaseID(228894));
 // Getting error due to backend expecting a list for Tracklist while this is sending an object
 // Shape json or do conversion then verify
 export async function addAlbumToDatabase(master) {
+    //console.log(master);
     try {
         const response = await fetch("http://localhost:8080/album", {
             method: "POST",
@@ -39,9 +41,10 @@ export async function addAlbumToDatabase(master) {
                 title: master.title,
                 artist: master.artist,
                 year: master.year,
-                genre: master.year,
-                thumb: master.thumb,
-                tracklist: getTracklistByReleaseID(master.id)
+                genre: master.genre,
+                style: master.style,
+                thumbnail: master.thumb,
+                tracklist: await getTracklistByReleaseID(master.id)
             }),
         }) 
         if (!response.ok) {
