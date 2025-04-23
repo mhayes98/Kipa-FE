@@ -13,7 +13,6 @@ export const getTracklistByReleaseID = async (id) => {
             throw new Error("Fetch tracklist failed");
         }else {
             const tracklist = await response.json();
-            console.log(tracklist);
             return tracklist;
         }
     }
@@ -22,11 +21,7 @@ export const getTracklistByReleaseID = async (id) => {
         return null;
     }
 }
-console.log(getTracklistByReleaseID(228894));
-// Getting error due to backend expecting a list for Tracklist while this is sending an object
-// Shape json or do conversion then verify
 export async function addAlbumToDatabase(master) {
-    //console.log(master);
     try {
         const response = await fetch("http://localhost:8080/album", {
             method: "POST",
@@ -34,9 +29,6 @@ export async function addAlbumToDatabase(master) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                // Consider adding style
-                // Update backend for thumbnail & genre (and potentially style)
-                // Double-check how to access value - master.VAL???
                 id: master.id,
                 title: master.title,
                 artist: master.artist,
@@ -44,7 +36,8 @@ export async function addAlbumToDatabase(master) {
                 genre: master.genre,
                 style: master.style,
                 thumbnail: master.thumb,
-                tracklist: await getTracklistByReleaseID(master.id)
+                // Array will processed in the backend and stored as raw text
+                tracklistAsArray: await getTracklistByReleaseID(master.id)
             }),
         }) 
         if (!response.ok) {
