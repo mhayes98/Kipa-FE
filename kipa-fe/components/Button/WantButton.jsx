@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { useUserAuthContext } from "../../context/UserAuthContext";
-import { getTracklistByReleaseID, addAlbumToDatabase } from '../../services/AlbumServices';
+import { getTracklistByReleaseID, addAlbumToDatabase, createUserAlbumConnection } from '../../services/AlbumServices';
 
 // CLICKING THIS BUTTON WILL NEED TO TRIGER A LOGIN IF USER IS NOT AUTH
 
@@ -10,7 +10,7 @@ function WantButton(master) {
 
     return (
         <>
-        <button onClick={() => addAlbumToDatabase(master)}>Want</button>
+        <button onClick={() => createUserAlbumConnection(master, username, "Want")}>Want</button>
         </>
     )
 }
