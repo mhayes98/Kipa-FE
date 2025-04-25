@@ -8,7 +8,9 @@ function LoginButton() {
     const { username } = useUserAuthContext();
     return (
         <>
-        <button onClick={toggleVisibility}>Trig Login</button>
+        <button 
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        onClick={toggleVisibility}>Trig Login</button>
         <h1>Username: {username}</h1>
         <p>Visibility: {visibility ? "Visible" : "Hidden"}</p>
         </>
