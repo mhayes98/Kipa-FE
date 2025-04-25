@@ -3,7 +3,7 @@ import { createContext, useState, useContext } from "react";
 export const UserAuthContext = createContext({
     authenticated: false,
     toggleAuthenticated: () => {},
-    username: "g",
+    username: "",
     setUsernameValue: () => {}
 });
 
