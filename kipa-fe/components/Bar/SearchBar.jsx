@@ -29,7 +29,7 @@ function SearchBar() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search for a master..."
+                    placeholder="Search for an artist or album..."
                 />
                 <button type="submit">Search</button>
                 <input type="checkbox" id="artist" name="artist" value="artist" />
