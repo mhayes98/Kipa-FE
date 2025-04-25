@@ -6,6 +6,9 @@ import { useUserAuthContext } from "../../context/UserAuthContext";
 function LoginButton() {
     const {visibility, toggleVisibility} = useLoginModalContext(); // True = visible, False = hidden
     const { username } = useUserAuthContext();
+
+    // This will need to be changed later
+    // Check for user auth & prompt for LoginModal if not auth (look at Want/OwnButton)
     return (
         <>
         <button 
