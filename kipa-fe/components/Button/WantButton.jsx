@@ -7,10 +7,24 @@ import { getTracklistByReleaseID, addAlbumToDatabase, createUserAlbumConnection 
 
 function WantButton(master) {
     const { username } = useUserAuthContext();
+    const { isAuthenticated } = useUserAuthContext();
+    const { toggleVisibility } = useLoginModalContext();
+
+    const handleClick = () => {
+        console.log(isAuthenticated);
+        if (isAuthenticated) {
+            createUserAlbumConnection(master, username, "Want");
+            console.log("TEST - TRUE");
+        }
+        else {
+            console.log("TEST - FALSE");
+            toggleVisibility();
+        }
+    }
 
     return (
         <>
-        <button onClick={() => createUserAlbumConnection(master, username, "Want")}>Want</button>
+        <button onClick={handleClick}>Want</button>
         </>
     )
 }
