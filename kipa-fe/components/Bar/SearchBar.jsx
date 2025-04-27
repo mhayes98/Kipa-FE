@@ -1,7 +1,8 @@
 import React from 'react';
 import { searchDiscogsByMaster, searchDiscogsByArtist,
         processMasterSearchResponse,  processArtistSearchResponse } from '../../services/SearchServices.js';
-import MasterCard from '/components/card/MasterCard.jsx' 
+import ArtistSearchResultsList from '../List/ArtistSearchResultsList.jsx';
+import MasterSearchResultsList from '../List/MasterSearchResultsList.jsx';
 
 
 function SearchBar() {
@@ -35,21 +36,36 @@ function SearchBar() {
                 <input type="checkbox" id="artist" name="artist" value="artist" />
                 <label htmlFor="artist">Include artists</label>
             </form>
-            {masterSearchResults.length > 0 && (
-                <ul>
-                    {masterSearchResults.map((result) => (
-                        <li key={result.title}>{result.title} + {result.genre}</li>
-                    ))}
-                </ul>
-            )}
-            {masterSearchResults.length > 0 && (
-                <MasterCard {...masterSearchResults[0]} />
-            )}
-            {masterSearchResults.length > 0 && (
-                <MasterCard {...masterSearchResults[1]} />
-            )}
+            
+            <div>
+                {artistSearchResults.length > 0 && (
+                        // results=... will access a direct array index
+                        // {..example} passes the entire array
+                        <ArtistSearchResultsList results={artistSearchResults} />
+                )}
+            </div>
+
+            <div>
+                {masterSearchResults.length > 0 && (
+                    <MasterSearchResultsList results={masterSearchResults} />
+                )}
+            </div>
+
         </div>
     );
 }
+
+            //     <ul>
+            //         {masterSearchResults.map((result) => (
+            //             <li key={result.title}>{result.title} + {result.genre}</li>
+            //         ))}
+            //     </ul>
+            // )}
+            // {masterSearchResults.length > 0 && (
+            //     <SearchResultsCard {...masterSearchResults[0]} />
+            // )}
+            // {masterSearchResults.length > 0 && (
+            //     <SearchResultsCard {...masterSearchResults[1]} />
+            
 
 export default SearchBar;
