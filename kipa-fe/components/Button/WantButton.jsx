@@ -3,13 +3,14 @@ import { useLoginModalContext } from "../../context/LoginModalContext";
 import { useUserAuthContext } from "../../context/UserAuthContext";
 import { getTracklistByReleaseID, addAlbumToDatabase, createUserAlbumConnection } from '../../services/AlbumServices';
 
-// CLICKING THIS BUTTON WILL NEED TO TRIGER A LOGIN IF USER IS NOT AUTH
 
 function WantButton(master) {
     const { username } = useUserAuthContext();
     const { isAuthenticated } = useUserAuthContext();
     const { toggleVisibility } = useLoginModalContext();
-
+    
+    // Make this function elsewhere and import it
+    // Trigger login modal if user is not authenticated
     const handleClick = () => {
         console.log(isAuthenticated);
         if (isAuthenticated) {
@@ -24,7 +25,7 @@ function WantButton(master) {
 
     return (
         <>
-        <button onClick={handleClick}>Want</button>
+        <button className="border-2 border-solid" onClick={handleClick}>Want</button>
         </>
     )
 }
