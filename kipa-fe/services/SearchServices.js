@@ -11,7 +11,6 @@ export const searchDiscogsByMaster = async (searchQuery) => {
         }
         else {
             const data = await response.json();
-            //console.log('Data fetched from Discogs:', data);
             return data;
         }
     }
@@ -22,7 +21,6 @@ export const searchDiscogsByMaster = async (searchQuery) => {
 
 export async function processMasterSearchResponse(searchQuery){
     return searchDiscogsByMaster(searchQuery).then((response) => {
-        console.log("MASTER RESPONSE: ", response);
         if (response) {
             return response.map((master) => {
                 return {
