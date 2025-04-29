@@ -8,26 +8,15 @@ function WantButton(master) {
     const { username } = useUserAuthContext();
     const { isAuthenticated } = useUserAuthContext();
     const { toggleVisibility } = useLoginModalContext();
-    
-    // Make this function elsewhere and import it
-    // Trigger login modal if user is not authenticated
-    const handleClick = () => {
-        console.log(isAuthenticated);
-        if (isAuthenticated) {
-            createUserAlbumConnection(master, username, "Want");
-            console.log("TEST - TRUE");
-        }
-        else {
-            console.log("TEST - FALSE");
-            toggleVisibility();
-        }
-    }
+
+    const userAlbumOnClickDTO = { master, username, isAuthenticated, status: "Want", toggleVisibility };
 
     return (
-        <>
-        <button className="border-2 border-solid" onClick={handleClick}>Want</button>
-        </>
-    )
+            <>
+            <button className="border-2 border-solid" 
+            onClick={() => handleUserAlbumButtonClick(userAlbumOnClickDTO)}>Own</button>
+            </>
+        )
 }
 
 export { WantButton };
