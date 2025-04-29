@@ -89,6 +89,17 @@ export async function createUserAlbumConnection(master, username, status) {
     }
 }
 
+export const handleUserAlbumButtonClick = (userAlbumOnClickDTO) => {
+    if (userAlbumOnClickDTO.isAuthenticated) {
+        createUserAlbumConnection(userAlbumOnClickDTO.master, 
+                                userAlbumOnClickDTO.username, 
+                                userAlbumOnClickDTO.status);
+    }
+    else {
+        userAlbumOnClickDTO.toggleVisibility();
+    }
+}
+
 // POST
 export const updateUserAlbumStatus = async () => {}
 
