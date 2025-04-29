@@ -6,7 +6,7 @@ function ArtistSearchResultsList({results}) {
         <>
             <div className="grid grid-cols-3 divide-x-3 divide-dashed m-4">
                 {results.map((result, index) => (
-                    <ArtistSearchResultsCard key={index} data={result} />
+                    <ArtistSearchResultsCard key={index} artist={result} />
                 ))}
             </div>
         </>

@@ -2,15 +2,16 @@ import React from 'react';
 import { WantButton } from '../Button/WantButton';
 import { OwnButton } from '../Button/OwnButton';
 
-function ArtistSearchResultsCard(master) {
+function ArtistSearchResultsCard(artist) {
+    const { title, thumb, genre, style } = artist;
     return (
         <>
             <div className="border-2 border-solid">
-                <h1>{master.title}</h1>
-                <img src={master.thumb}/>
-                <WantButton{...master}/>
-                <OwnButton{...master}/>
-                <h4>{master.genre} - {master.style}</h4>
+                <h1>{title}</h1>
+                <img src={thumb}/>
+                <WantButton{...artist}/>
+                <OwnButton{...artist}/>
+                <h4>{genre}</h4>
             </div>
         </>
     );
