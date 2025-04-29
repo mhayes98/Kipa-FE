@@ -4,7 +4,7 @@ import { OwnButton } from '../Button/OwnButton';
 
 function MasterSearchResultsCard({ master }) {
     // Destrcturing the object to access values directly
-    const { artist, thumb, title, year} = master;
+    const { artist, thumb, title, year } = master;
     return (
         <>
             <div className="border-2 border-solid">
