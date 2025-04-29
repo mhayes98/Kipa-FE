@@ -8,6 +8,7 @@ export const LoginModalContext = createContext({
 function LoginModalContextProvider({ children }) {
     const [visibility, setVisibility] = useState(false);
 
+    // Toggles visibility of the login modal
     const toggleVisibility = () => {
         setVisibility(visibility => visibility ? false : true);
     };
