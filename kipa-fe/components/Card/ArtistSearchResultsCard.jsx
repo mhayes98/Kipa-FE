@@ -9,8 +9,6 @@ function ArtistSearchResultsCard(artist) {
             <div className="border-2 border-solid">
                 <h1>{title}</h1>
                 <img src={thumb}/>
-                <WantButton{...artist}/>
-                <OwnButton{...artist}/>
                 <h4>{genre}</h4>
             </div>
         </>
