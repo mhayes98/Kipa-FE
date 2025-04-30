@@ -5,7 +5,7 @@ import { useUserAuthContext } from "../../context/UserAuthContext";
 import { authorizeLoginAttempt } from "../../services/UserServices";
 
 function LoginModal() {
-  const { toggleAuthenticated, setUsernameValue } = useUserAuthContext();
+  const { setAuthState, setUsernameValue } = useUserAuthContext();
   const { visibility, toggleVisibility } = useLoginModalContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ function LoginModal() {
     const data = await authorizeLoginAttempt(username, password);
     if (data) {
       setUsernameValue(data.username);
-      toggleAuthenticated();
+      setAuthState(true);
       toggleVisibility();
       console.log(data.message);
     }
