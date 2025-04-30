@@ -7,10 +7,10 @@ import { getTracklistByReleaseID, addAlbumToDatabase,
 
 function OwnButton(master) {
     const { username } = useUserAuthContext();
-    const { isAuthenticated } = useUserAuthContext();
+    const { authenticated } = useUserAuthContext();
     const { toggleVisibility } = useLoginModalContext();
     
-    const userAlbumOnClickDTO = { master, username, isAuthenticated, status: "Own", toggleVisibility };
+    const userAlbumOnClickDTO = { master, username, authenticated, status: "Own", toggleVisibility };
 
     return (
         <>

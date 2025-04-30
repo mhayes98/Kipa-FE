@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { useUserAuthContext } from "../../context/UserAuthContext";
-import { getTracklistByReleaseID, addAlbumToDatabase, createUserAlbumConnection } from '../../services/AlbumServices';
+import { getTracklistByReleaseID, addAlbumToDatabase,
+    createUserAlbumConnection, handleUserAlbumButtonClick } from '../../services/AlbumServices';
 
 
 function WantButton(master) {
@@ -14,7 +15,7 @@ function WantButton(master) {
     return (
             <>
             <button className="border-2 border-solid" 
-            onClick={() => handleUserAlbumButtonClick(userAlbumOnClickDTO)}>Own</button>
+            onClick={() => handleUserAlbumButtonClick(userAlbumOnClickDTO)}>Want</button>
             </>
         )
 }
