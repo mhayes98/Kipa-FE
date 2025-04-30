@@ -2,7 +2,7 @@ import React from 'react';
 import { WantButton } from '../Button/WantButton';
 import { OwnButton } from '../Button/OwnButton';
 
-function ArtistSearchResultsCard(artist) {
+function ArtistSearchResultsCard({ artist} ) {
     const { title, thumb, genre, style } = artist;
     return (
         <>
