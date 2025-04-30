@@ -1,6 +1,5 @@
 // This retrieves the tracklist of an Album and is only called when adding an album to the database
 export const getTracklistByReleaseID = async (id) => {
-    console.log("ID", id);
     try {
         const response = await fetch(`http://localhost:8080/master/${id}`, {
             method: "GET",
@@ -98,7 +97,6 @@ export const handleUserAlbumButtonClick = (userAlbumOnClickDTO) => {
     else {
         userAlbumOnClickDTO.toggleVisibility();
     }
-    console.log(userAlbumOnClickDTO.authenticated);
 }
 
 // POST
