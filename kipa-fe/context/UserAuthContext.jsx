@@ -2,7 +2,7 @@ import { createContext, useState, useContext } from "react";
 
 export const UserAuthContext = createContext({
     authenticated: false,
-    toggleAuthenticated: () => {},
+    setAuthState: () => {},
     username: "",
     setUsernameValue: () => {}
 });
@@ -12,8 +12,9 @@ function UserAuthContextProvider({ children }) {
     const [authenticated, setAuthenticated] = useState(false);
     const [username, setUsername] = useState("");
 
-    const toggleAuthenticated = () => {
-        setAuthenticated(authenticated => authenticated ? false : true);
+    // Refactor later to work off cookie value from login API?
+    const setAuthState = (authState) => {
+        setAuthenticated(authState);
     }
 
     const setUsernameValue = (value) => {
@@ -23,7 +24,7 @@ function UserAuthContextProvider({ children }) {
     }
         
     return (
-        <UserAuthContext.Provider value={{ authenticated, toggleAuthenticated, username, setUsernameValue }}>
+        <UserAuthContext.Provider value={{ authenticated, setAuthState, username, setUsernameValue }}>
             {children}
         </UserAuthContext.Provider>
     );
