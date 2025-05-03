@@ -51,7 +51,7 @@ export async function addAlbumToDatabase(master) {
 // POST
 export async function createUserAlbumConnection(master, username, status) {
     try {
-        const response = await fetch(`http://localhost:8080/user-album/${username}`, {
+        const response = await fetch("http://localhost:8080/user-album", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
