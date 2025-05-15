@@ -112,6 +112,7 @@ export const getMySavedAlbums = async (username) => {
             throw new Error("Fetch my UserAlbums error");
         }else {
             const myUserAlbums = await response.json();
+            console.log(myUserAlbums);
             return myUserAlbums;
         }
     }
