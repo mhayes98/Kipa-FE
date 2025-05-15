@@ -99,6 +99,28 @@ export const handleUserAlbumButtonClick = (userAlbumOnClickDTO) => {
     }
 }
 
+export const getMySavedAlbums = async (username) => {
+    try {
+        const response = await fetch(`http://localhost:8080/user-albums/${username}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+
+        if (!response.ok) {
+            throw new Error("Fetch my UserAlbums error");
+        }else {
+            const myUserAlbums = await response.json();
+            return myUserAlbums;
+        }
+    }
+    catch {
+        console.error("Error: ", error);
+        return null;
+    }
+}
+
 // POST
 export const updateUserAlbumStatus = async () => {}
 
