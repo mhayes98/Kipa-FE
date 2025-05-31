@@ -7,13 +7,9 @@ import { LoginModal } from "../components/Modal/LoginModal";
 function Search() {
     return( 
         <>
-            <UserAuthContextProvider>
-                <LoginModalContextProvider>
-                    <h1>Search</h1>
-                    <SearchBar/>
-                    <LoginModal/>
-                </LoginModalContextProvider>
-            </UserAuthContextProvider>
+            <h1>Search</h1>
+            <SearchBar/>
+            <LoginModal/>
         </>
     )
 }

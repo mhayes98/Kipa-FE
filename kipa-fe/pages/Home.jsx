@@ -1,18 +1,15 @@
 import React from "react";
-import { LoginModal } from '../components/Modal/LoginModal.jsx';
-import { LoginModalContextProvider  } from '../context/LoginModalContext.jsx';
-import { UserAuthContextProvider } from '../context/UserAuthContext.jsx';
-import { SavedAlbumList } from '../components/List/SavedAlbumsList.jsx';
+import { LoginModal } from '../components/Modal/LoginModal';
+import { LoginModalContextProvider  } from '../context/LoginModalContext';
+import { UserAuthContextProvider } from "../context/UserAuthContext";
+import { SavedAlbumList } from '../components/List/SavedAlbumsList';
 
 function Home() {
     return (
         <>
-            <UserAuthContextProvider>
-                <LoginModalContextProvider>
-                    <LoginModal />
-                    <SavedAlbumList />
-                </LoginModalContextProvider>
-            </UserAuthContextProvider>
+            <h1>Home</h1>
+            <SavedAlbumList />
+            <LoginModal />
         </>
     );
 }
