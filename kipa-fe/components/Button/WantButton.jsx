@@ -1,8 +1,7 @@
 import React from 'react';
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { useUserAuthContext } from "../../context/UserAuthContext";
-import { getTracklistByReleaseID, addAlbumToDatabase,
-    createUserAlbumConnection, handleUserAlbumButtonClick } from '../../services/AlbumServices';
+import { handleUserAlbumButtonClick } from '../../services/AlbumServices';
 
 
 function WantButton(master) {
