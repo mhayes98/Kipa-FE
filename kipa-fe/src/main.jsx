@@ -10,16 +10,13 @@ import Search from '../pages/Search.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
+    children: [
+      { path: "/register", element: <Register /> },
+      { path: "/search", element: <Search /> },
+      { path: "/", element: <Home />}
+    ]
   },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/search",
-    element: <Search />,
-  }
 ])
 
 createRoot(document.getElementById('root')).render(
