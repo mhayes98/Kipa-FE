@@ -22,6 +22,7 @@ function LoginModal() {
       setAuthState(true);
       toggleVisibility();
       console.log(data.message);
+      console.log(username);
     }
   };
 
