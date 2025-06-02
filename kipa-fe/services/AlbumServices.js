@@ -112,7 +112,6 @@ export const getMySavedAlbums = async (username) => {
             throw new Error("Fetch my UserAlbums error");
         }else {
             const myUserAlbums = await response.json();
-            console.log(myUserAlbums);
             return myUserAlbums;
         }
     }
@@ -120,6 +119,31 @@ export const getMySavedAlbums = async (username) => {
         console.error("Error: ", error);
         return null;
     }
+}
+
+export async function processMySavedAlbumsResponse(username) {
+    return getMySavedAlbums(username).then((response) => {
+        if (response) {
+            return response.map((userAlbum) => {
+                return {
+                    albumID: userAlbum.albumAlbumid,
+                    artist: userAlbum.artist,
+                    genre: userAlbum.genre,
+                    notes: userAlbum.notes,
+                    status: userAlbum.status,
+                    style: userAlbum.style,
+                    tags: userAlbum.tags,
+                    thumbnail: userAlbum.thumbnail,
+                    title: userAlbum.title,
+                    tracklist: userAlbum.tracklist,
+                    year: userAlbum.year
+                };
+            });
+        } else {
+            throw new error ("Invalid response format");
+        }
+    
+    })
 }
 
 // POST
