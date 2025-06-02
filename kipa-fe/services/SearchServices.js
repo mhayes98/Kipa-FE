@@ -24,10 +24,6 @@ export async function processMasterSearchResponse(searchQuery){
         if (response) {
             return response.map((master) => {
                 return {
-                    // Title response contains artist name & album name, separated by a hyphen
-                    // THIS NEEDS TO BE REVISITED --> BUGS ON ARTISTS LIKE WU-TANG CLAN
-                    // LOOK INTO DISCOGS API VALUES
-                    // MAYBE HYPHEN SEP. BY SPACES?
                     id: master.id,
                     artist: master.title.split(" - ")[0],
                     title: master.title.split(" - ")[1],
