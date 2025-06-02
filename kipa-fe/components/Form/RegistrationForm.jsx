@@ -22,8 +22,6 @@ function RegistrationForm() {
         return password === confirmPassword;
     }
 
-    console.log("USERNAME:", username);
-
     return (
         <form>
             <label htmlFor="email"><b>E-mail</b></label>
