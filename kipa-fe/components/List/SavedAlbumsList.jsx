@@ -29,11 +29,11 @@ function SavedAlbumList() {
 
     return(
         <>
-            <div className="grid grid-cols-3 divide-x-3 divide-dashed m-4">
+            {/* <div className="grid grid-cols-3 divide-x-3 divide-dashed m-4">
                 {results.map((result, index) => (
                     <SavedAlbumCard key={index} master={result} />
                 ))}
-            </div>
+            </div> */}
         </>
     )
 }
