@@ -55,7 +55,7 @@ function LoginModal() {
             className="bg-white p-6 rounded-2xl shadow-xl flex flex-col gap-4 w-96"
           >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Login</h2>
+              <h2 className="text-xl font-bold">Kipa Branding Here</h2>
               <button
                 type="button"
                 onClick={toggleVisibility}
@@ -88,6 +88,7 @@ function LoginModal() {
               onChange={(e) => setPassword(e.target.value)}
               className="border rounded p-2"
             />
+            <p>Forgot password? ***Functionality needed</p>
 
             <div className="flex justify-between mt-4">
               <button
