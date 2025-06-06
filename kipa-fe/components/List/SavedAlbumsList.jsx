@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useUserAuthContext } from "../../context/UserAuthContext";
 import { getMySavedAlbums, processMySavedAlbumsResponse } from '../../services/AlbumServices';
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { SavedAlbumCard } from '../Card/SavedAlbumCard';
 
-function SavedAlbumList() {
+function SavedAlbumList({results}) {
     const { username, authenticated } = useUserAuthContext();
-    const { toggleVisibility } = useLoginModalContext();
+    const [mySavedAlbums, setMySavedAlbums] = React.useState([]);
 
-    if(authenticated){
-        console.log(`Authenticated = True. Username - ${username}`);
-        processMySavedAlbumsResponse(username);
-    }
-    else {
-        console.log("Not authenticated");
-        //toggleVisibility();
-    }
+    useEffect(() => {
+        const getMySavedAlbums = async() => {
+            try {
+                if(authenticated) {
+                    setMySavedAlbums(await processMySavedAlbumsResponse(username));
+                    console.log("TEST");
+                }
+            }
+            catch (error) {
+                console.error("Error fetching your collection: ", error);
+            }
+        }
+        getMySavedAlbums();
+    }, []);
+
 
     /*  
         Need to figure out how we want this page to look/work
@@ -29,11 +36,11 @@ function SavedAlbumList() {
 
     return(
         <>
-            {/* <div className="grid grid-cols-3 divide-x-3 divide-dashed m-4">
-                {results.map((result, index) => (
-                    <SavedAlbumCard key={index} master={result} />
+            { <div className="grid grid-cols-3 divide-x-3 divide-dashed m-4">
+                {mySavedAlbums.map((result, index) => (
+                    <SavedAlbumCard key={index} album={result} />
                 ))}
-            </div> */}
+            </div> }
         </>
     )
 }
