@@ -2,7 +2,9 @@ import { createContext, useState, useContext } from "react";
 
 export const AlbumModalContext = createContext({
     visibility: false,
-    toggleVisibility: () => {}
+    toggleVisibility: () => {},
+    master: "",
+    setMaster: () => {}
 });
 
 function AlbumModalContextProvider({ children }) {
@@ -12,6 +14,11 @@ function AlbumModalContextProvider({ children }) {
     const toggleVisibility = () => {
         setVisibility(visibility => visibility ? false : true);
     };
+
+    const openModalWithAlbumData = (master) => {
+       toggleVisibility();
+       setMaster(master);
+    }
 
     return (
         <AlbumModalContext.Provider value={{ visibility, toggleVisibility, setMaster, master }}>
