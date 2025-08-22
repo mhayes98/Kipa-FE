@@ -14,7 +14,7 @@ function AlbumModalContextProvider({ children }) {
     };
 
     return (
-        <AlbumModalContext.Provider value={{ visibility, toggleVisibility, setMaster, master, setMasterState }}>
+        <AlbumModalContext.Provider value={{ visibility, toggleVisibility, setMaster, master }}>
             {children}
         </AlbumModalContext.Provider>
     );
