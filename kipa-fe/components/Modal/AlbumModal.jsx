@@ -5,7 +5,7 @@ import { useAlbumModalContext } from "../../context/AlbumModalContext";
 
 function AlbumModal({ master }) {
     // Destrcturing the object to access values directly
-    const { artist, thumb, title, year, genre} = master;
+    const { artist, thumb, title, year, genre } = master;
     const { visibility, toggleVisibility } = useAlbumModalContext();
 
 
