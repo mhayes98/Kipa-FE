@@ -9,10 +9,10 @@ import { getTracklistByReleaseID, addAlbumToDatabase,
 function OwnButton(master) {
     const { username } = useUserAuthContext();
     const { authenticated } = useUserAuthContext();
-    const { toggleVisibility: toggleLoginModal } = useLoginModalContext();
-    const { toggleVisibility: toggleAlbumModal, openModalWithAlbumData } = useAlbumModalContext();
+    const { toggleLoginModalVisibility } = useLoginModalContext();
+    const { toggleAlbumModalVisibility, openModalWithAlbumData } = useAlbumModalContext();
     
-    const userAlbumOnClickDTO = { master, username, authenticated, status: "Own", toggleLoginModal };
+    const userAlbumOnClickDTO = { master, username, authenticated, status: "Own", toggleLoginModalVisibility };
 
     return (
         <>

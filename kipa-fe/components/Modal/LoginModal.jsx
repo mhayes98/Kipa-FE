@@ -6,7 +6,7 @@ import { authorizeLoginAttempt } from "../../services/UserServices";
 
 function LoginModal() {
   const { setAuthState, setUsernameValue } = useUserAuthContext();
-  const { visibility, toggleVisibility } = useLoginModalContext();
+  const { loginModalVisibility, toggleLoginModalVisibility } = useLoginModalContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const modalRef = useRef();
@@ -20,7 +20,7 @@ function LoginModal() {
     if (data) {
       setUsernameValue(data.username);
       setAuthState(true);
-      toggleVisibility();
+      toggleLoginModalVisibility();
       console.log(data.message);
       console.log(username);
     }
@@ -29,22 +29,22 @@ function LoginModal() {
   // Close modal on ESC
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === "Escape") toggleVisibility();
+      if (e.key === "Escape") toggleLoginModalVisibility();
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, [toggleVisibility]);
+  }, [toggleLoginModalVisibility]);
 
   // Close modal when clicking outside
   const handleClickOutside = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
-      toggleVisibility();
+      toggleLoginModalVisibility();
     }
   };
 
   return (
     <>
-      {visibility && (
+      {loginModalVisibility && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={handleClickOutside}
@@ -58,7 +58,7 @@ function LoginModal() {
               <h2 className="text-xl font-bold">Kipa Branding Here</h2>
               <button
                 type="button"
-                onClick={toggleVisibility}
+                onClick={toggleLoginModalVisibility}
                 className="text-gray-500 hover:text-black"
               >
                 ✕
@@ -100,7 +100,7 @@ function LoginModal() {
               </button>
               <button
                 type="button"
-                onClick={toggleVisibility}
+                onClick={toggleLoginModalVisibility}
                 className="text-gray-500 hover:text-black"
               >
                 Close

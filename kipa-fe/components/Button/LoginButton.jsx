@@ -4,7 +4,7 @@ import { useUserAuthContext } from "../../context/UserAuthContext";
 
 
 function LoginButton() {
-    const {visibility, toggleVisibility} = useLoginModalContext(); // True = visible, False = hidden
+    const {loginModalVisibility, toggleLoginModalVisibility} = useLoginModalContext(); // True = visible, False = hidden
     const { username } = useUserAuthContext();
 
     // This will need to be changed later
@@ -14,7 +14,7 @@ function LoginButton() {
         {/* <p>__________________________________________</p>
         <button 
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        onClick={toggleVisibility}>Trig Login</button>
+        onClick={toggleLoginModalVisibility}>Trig Login</button>
         <h1>Username: {username}</h1>
         <p>Visibility: {visibility ? "Visible" : "Hidden"}</p>
         <p>__________________________________________</p>

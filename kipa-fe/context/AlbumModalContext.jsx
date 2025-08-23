@@ -1,28 +1,29 @@
 import { createContext, useState, useContext } from "react";
 
 export const AlbumModalContext = createContext({
-    visibility: false,
-    toggleVisibility: () => {},
+    albumModalVisibility: false,
+    toggleAlbumModalVisibility: () => {},
     master: "",
     setMaster: () => {}
 });
 
 function AlbumModalContextProvider({ children }) {
-    const [visibility, setVisibility] = useState(false);
+    const [albumModalVisibility, setAlbumModalVisibility] = useState(false);
     const [master, setMaster] = useState("");
 
-    const toggleVisibility = () => {
-        setVisibility(visibility => visibility ? false : true);
+    const toggleAlbumModalVisibility = () => {
+        setAlbumModalVisibility(albumModalVisibility => albumModalVisibility ? false : true);
     };
 
     const openModalWithAlbumData = (master) => {
         console.log("openModalWithAlbumData triggered");
         setMaster(master);
-        toggleVisibility();
+        toggleAlbumModalVisibility();
     }
 
     return (
-        <AlbumModalContext.Provider value={{ visibility, toggleVisibility, setMaster, master, openModalWithAlbumData }}>
+        <AlbumModalContext.Provider value={{ albumModalVisibility, toggleAlbumModalVisibility, 
+                                    setMaster, master, openModalWithAlbumData }}>
             {children}
         </AlbumModalContext.Provider>
     );

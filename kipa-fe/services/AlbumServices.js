@@ -95,7 +95,7 @@ export const handleUserAlbumButtonClick = (userAlbumOnClickDTO) => {
                                 userAlbumOnClickDTO.status);
     }
     else {
-        userAlbumOnClickDTO.toggleVisibility();
+        userAlbumOnClickDTO.toggleLoginModalVisibility();
     }
 }
 

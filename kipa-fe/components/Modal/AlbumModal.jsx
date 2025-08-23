@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAlbumModalContext } from "../../context/AlbumModalContext";
 
 function AlbumModal() {
-    const { visibility, toggleVisibility, master } = useAlbumModalContext();
+    const { albumModalVisibility, toggleAlbumModalVisibility, master } = useAlbumModalContext();
     // Destrcturing the object to access values directly
     const { artist, thumb, title, year, genre } = master;
 
@@ -12,16 +12,16 @@ function AlbumModal() {
     // Close modal on ESC
     useEffect(() => {
         const handleEsc = (e) => {
-        if (e.key === "Escape") toggleVisibility();
+        if (e.key === "Escape") toggleAlbumModalVisibility();
     };
         window.addEventListener("keydown", handleEsc);
         return () => window.removeEventListener("keydown", handleEsc);
-    }, [toggleVisibility]);
+    }, [toggleAlbumModalVisibility]);
 
     // Close modal when clicking outside - Maybe not use? Make closing intentional via escape or close button?
     // const handleClickOutside = (e) => {
     //     if (modalRef.current && !modalRef.current.contains(e.target)) {
-    //         toggleVisibility();
+    //         toggleAlbumModalVisibility();
     //     }
     // };
 
@@ -33,7 +33,7 @@ function AlbumModal() {
 
     return (
         <>
-            {visibility && (
+            {albumModalVisibility && (
                 <div style={{styles}}>
                     <h1>{artist}</h1>
                     <img src={thumb}/>

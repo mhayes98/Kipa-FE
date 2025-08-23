@@ -7,9 +7,9 @@ import { handleUserAlbumButtonClick } from '../../services/AlbumServices';
 function WantButton(master) {
     const { username } = useUserAuthContext();
     const { isAuthenticated } = useUserAuthContext();
-    const { toggleVisibility } = useLoginModalContext();
+    const { toggleLoginModalVisibility } = useLoginModalContext();
 
-    const userAlbumOnClickDTO = { master, username, isAuthenticated, status: "Want", toggleVisibility };
+    const userAlbumOnClickDTO = { master, username, isAuthenticated, status: "Want", toggleLoginModalVisibility };
 
     return (
             <>

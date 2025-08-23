@@ -3,13 +3,13 @@ import { useLoginModalContext } from "../../context/LoginModalContext";
 import { NavLink } from 'react-router';
 
 function AuthPromptView() {
-    const { toggleVisibility } = useLoginModalContext();
+    const { toggleLoginModalVisibility } = useLoginModalContext();
 
     return (
         <>
             <h2>Login to view your collection!</h2>
             <button type="button"
-            onClick={toggleVisibility}
+            onClick={toggleLoginModalVisibility}
             className="bg-blue-400 text-white px-1.5 py-0.2 rounded hover:bg-blue-600">
                 Login
             </button>

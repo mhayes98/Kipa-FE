@@ -1,20 +1,20 @@
 import { createContext, useState, useContext } from "react";
 
 export const LoginModalContext = createContext({
-    visibility: false,
-    toggleVisibility: () => {}
+    loginModalVisibility: false,
+    toggleLoginModalVisibility: () => {}
 });
 
 function LoginModalContextProvider({ children }) {
-    const [visibility, setVisibility] = useState(false);
+    const [loginModalVisibility, setLoginModalVisibility] = useState(false);
 
     // Toggles visibility of the login modal
-    const toggleVisibility = () => {
-        setVisibility(visibility => visibility ? false : true);
+    const toggleLoginModalVisibility = () => {
+        setLoginModalVisibility(loginModalVisibility => loginModalVisibility ? false : true);
     };
 
     return (
-        <LoginModalContext.Provider value={{ visibility, toggleVisibility }}>
+        <LoginModalContext.Provider value={{ loginModalVisibility, toggleLoginModalVisibility }}>
             {children}
         </LoginModalContext.Provider>
     );
