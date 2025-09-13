@@ -12,7 +12,7 @@ function AlbumModal() {
     // Close modal on ESC
     useEffect(() => {
         const handleEsc = (e) => {
-        if (e.key === "Escape") toggleAlbumModalVisibility();
+        if (e.key === "Escape" && albumModalVisibility) toggleAlbumModalVisibility();
     };
         window.addEventListener("keydown", handleEsc);
         return () => window.removeEventListener("keydown", handleEsc);
@@ -25,7 +25,8 @@ function AlbumModal() {
     //     }
     // };
 
-    console.log("AlbumModal triggered");
+    //console.log("AlbumModal triggered");
+    console.log("Album Modal Visibility State (Modal): ", albumModalVisibility);
 
     const styles = {
         border: '3px black'
