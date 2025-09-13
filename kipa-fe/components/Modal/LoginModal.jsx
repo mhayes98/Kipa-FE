@@ -29,7 +29,7 @@ function LoginModal() {
   // Close modal on ESC
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === "Escape") toggleLoginModalVisibility();
+      if (e.key === "Escape" && loginModalVisibility) toggleLoginModalVisibility();
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
