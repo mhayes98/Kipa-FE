@@ -9,12 +9,12 @@ import { AlbumModal } from "../components/Modal/AlbumModal";
 function Search() {
     return( 
         <>
-            {/* <AlbumModalContextProvider> */}
+            <AlbumModalContextProvider>
                 <h1>Search</h1>
                 <SearchBar/>
                 <LoginModal/>
                 <AlbumModal/>
-            {/* </AlbumModalContextProvider> */}
+            </AlbumModalContextProvider>
         </>
     )
 }
