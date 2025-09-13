@@ -16,10 +16,8 @@ function AlbumModalContextProvider({ children }) {
     };
 
     const openAlbumModalWithAlbumData = (master) => {
-        //console.log("openAlbumModalWithAlbumData triggered");
         setMaster(master);
         toggleAlbumModalVisibility();
-        console.log("Album Modal Visbility State (Context): ", albumModalVisibility);
     }
 
     return (
