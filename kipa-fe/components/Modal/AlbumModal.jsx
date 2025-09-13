@@ -9,6 +9,8 @@ function AlbumModal() {
     const { artist, thumb, title, year, genre } = master;
 
 
+    console.log("AlbumModal re-rendered, visible?", albumModalVisibility);
+
     // Close modal on ESC
     useEffect(() => {
         const handleEsc = (e) => {
@@ -35,28 +37,44 @@ function AlbumModal() {
     return (
         <>
             {albumModalVisibility && (
-                <div style={{styles}}>
-                    <h1>{artist}</h1>
-                    <img src={thumb}/>
-                    <h2>{title} - {year}</h2>
-                    <h4>{genre}</h4>
-                    {/* Tags will go here - Function needs to parse tags*/}
-                    {/* <TagTextBox/> */}
-                    <p>Placeholder - TagTextBox</p>
-
-                    {/* Notes go here */}
-                    {/* <Notes/> */}
-                    <p>Placeholder - Notes</p>
-
-                    {/* Potentially track list? */}
-                    <p>Placeholder - Track List?</p>
-
-                    {/*Save button goes here */}
-                    <p>Placeholder - Save Button</p>
-
-                    {/*Close button goes here */}
-                    <p>Placeholder - Close Button</p>
-                </div>
+                <div
+                    style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100vw",
+                        height: "100vh",
+                        backgroundColor: "rgba(0,0,0,0.6)", // semi-transparent backdrop
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        zIndex: 9999, // make sure it's above everything
+                    }}
+                    >
+                    <div
+                        style={{
+                        backgroundColor: "#fff",
+                        padding: "2rem",
+                        borderRadius: "8px",
+                        maxWidth: "500px",
+                        width: "90%",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                        textAlign: "center",
+                        }}
+                    >
+                        <h1>{artist}</h1>
+                        <img src={thumb} alt={title} />
+                        <h2>
+                        {title} - {year}
+                        </h2>
+                        <h4>{genre}</h4>
+                        <p>Placeholder - TagTextBox</p>
+                        <p>Placeholder - Notes</p>
+                        <p>Placeholder - Track List?</p>
+                        <p>Placeholder - Save Button</p>
+                        <p>Placeholder - Close Button</p>
+                    </div>
+                    </div>
             )}
         </>
     )
