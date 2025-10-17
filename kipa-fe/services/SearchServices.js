@@ -30,7 +30,7 @@ export async function processMasterSearchResponse(searchQuery){
                     year: master.year,
                     thumb: master.thumb,
                     genre: master.genre,
-                    style: master.style
+                    style: master.style,
                 };
             });
         } else {
@@ -70,12 +70,48 @@ export async function processArtistSearchResponse(searchQuery){
                     title: artist.title,
                     thumb: artist.thumb,
                     genre: artist.genre,
-                    style: artist.style
-                    
+                    style: artist.style,
                 };
             });
         } else {
             throw new Error('Invalid response format');
         }
     });
+}
+
+export const getMasterTracklist = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:8080/master/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            console.error('Error fetching data from Discogs:', response.statusText);
+        }
+        else {
+            const data = await response.json();
+            //processMasterTracklistResponse(data);
+            return data;
+        }
+    }
+    catch (error){
+        console.error('Error fetching data from Discogs:', error);
+    }
+}
+
+export async function processMasterTracklistResponse(id) {
+    return getMasterTracklist(id).then((response) => {
+        if (response) {
+            return response.map(track => {
+                return {
+                    title: track.title,
+                    duration: track.duration
+                };
+            })
+        } else {
+            throw new Error('Invalid response format');
+        }
+    })
 }

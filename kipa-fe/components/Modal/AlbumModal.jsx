@@ -2,14 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 // import { TagTextBox } from "../../components/TextBox";
 // import { Notes } from "../../components/TextBox";
 import { useAlbumModalContext } from "../../context/AlbumModalContext";
+import { processMasterTracklistResponse, getMasterTracklist } from "../../services/SearchServices";
 
 function AlbumModal() {
     const { albumModalVisibility, toggleAlbumModalVisibility, master } = useAlbumModalContext();
     // Destrcturing the object to access values directly
-    const { artist, thumb, title, year, genre } = master;
+    const { artist, thumb, title, year, genre, id } = master;
+    //const { song, duration } = track;
 
+    // Logs a promise pending object - unable to access tracklist
+    const tracklist = processMasterTracklistResponse(master.id);
+    console.log(tracklist);
 
-    console.log("AlbumModal re-rendered, visible?", albumModalVisibility);
 
     // Close modal on ESC
     useEffect(() => {
@@ -20,64 +24,155 @@ function AlbumModal() {
         return () => window.removeEventListener("keydown", handleEsc);
     }, [toggleAlbumModalVisibility]);
 
-    // Close modal when clicking outside - Maybe not use? Make closing intentional via escape or close button?
-    // const handleClickOutside = (e) => {
-    //     if (modalRef.current && !modalRef.current.contains(e.target)) {
-    //         toggleAlbumModalVisibility();
-    //     }
-    // };
 
-    //console.log("AlbumModal triggered");
-    console.log("Album Modal Visibility State (Modal): ", albumModalVisibility);
-
-    const styles = {
-        border: '3px black'
-    };
 
     return (
-        <>
-            {albumModalVisibility && (
+    <>
+        {albumModalVisibility && (
+            <div
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                    backgroundColor: "rgba(0,0,0,0.6)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    zIndex: 9999,
+                }}
+            >
                 <div
                     style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        width: "100vw",
-                        height: "100vh",
-                        backgroundColor: "rgba(0,0,0,0.6)", // semi-transparent backdrop
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 9999, // make sure it's above everything
-                    }}
-                    >
-                    <div
-                        style={{
-                        backgroundColor: "#fff",
+                        backgroundColor: "#2c2c2c",
+                        color: "#f0f0f0",
                         padding: "2rem",
-                        borderRadius: "8px",
-                        maxWidth: "500px",
+                        borderRadius: "12px",
                         width: "90%",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-                        textAlign: "center",
+                        maxWidth: "500px",
+                        maxHeight: "90vh",
+                        overflowY: "auto",
+                        position: "relative",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem",
+                        boxShadow: "0 8px 20px rgba(0,0,0,0.5)", // subtle shadow around modal
+                        border: "1px solid #3a3a3a", // optional subtle border
+                    }}
+                >
+                    {/* Close button */}
+                    <button
+                        style={{
+                            position: "absolute",
+                            top: "1rem",
+                            right: "1rem",
+                            background: "none",
+                            border: "1px solid #f0f0f0",
+                            color: "#f0f0f0",
+                            borderRadius: "4px",
+                            padding: "0.25rem 0.5rem",
+                            cursor: "pointer",
                         }}
                     >
-                        <h1>{artist}</h1>
-                        <img src={thumb} alt={title} />
-                        <h2>
-                        {title} - {year}
-                        </h2>
-                        <h4>{genre}</h4>
+                        X
+                    </button>
+
+                    {/* Top row: Album art + Track list */}
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "1rem",
+                        }}
+                    >
+                        {/* Album art + info below */}
+                        <div style={{ flex: "0 0 200px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <img
+                                src={thumb}
+                                alt={title}
+                                style={{
+                                    width: "100%",
+                                    height: "auto",
+                                    borderRadius: "8px",
+                                    border: "2px solid #555", // subtle border around cover
+                                    boxShadow: "0 4px 12px rgba(0,0,0,0.4)", // slight depth
+                                    padding: "2px",
+                                }}
+                            />
+                            <h3 style={{ marginTop: "1rem", marginBottom: "0.25rem", textAlign: "center" }}>{artist}</h3>
+                            <h2 style={{ margin: 0, textAlign: "center" }}>
+                                {title} - {year}
+                            </h2>
+                            <h4 style={{ marginTop: "0.5rem", fontWeight: "normal", textAlign: "center" }}>{genre}</h4>
+                        </div>
+
+                        {/* Track list */}
+                        <div
+                            style={{
+                                flex: "1 1 auto",
+                                minHeight: "300px",
+                                backgroundColor: "#3a3a3a",
+                                border: "1px solid #555",
+                                borderRadius: "6px",
+                                padding: "0.5rem",
+                                overflowY: "auto",
+                            }}
+                        >
+                            <ul>
+                                {/* {tracklist.map((song, index) => (
+                                    <li key={index}>{song}</li>
+                                ))} */}
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Tags */}
+                    <div
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: "0.5rem",
+                        }}
+                    >
                         <p>Placeholder - TagTextBox</p>
-                        <p>Placeholder - Notes</p>
-                        <p>Placeholder - Track List?</p>
-                        <p>Placeholder - Save Button</p>
-                        <p>Placeholder - Close Button</p>
                     </div>
+
+                    {/* Notes */}
+                    <textarea
+                        placeholder="Notes"
+                        style={{
+                            width: "100%",
+                            minHeight: "150px",
+                            backgroundColor: "#4a4a4a",
+                            color: "#f0f0f0",
+                            border: "1px solid #555",
+                            borderRadius: "6px",
+                            padding: "0.5rem",
+                            resize: "vertical",
+                        }}
+                    />
+
+                    {/* Save button */}
+                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                        <button
+                            style={{
+                                background: "none",
+                                border: "1px solid #f0f0f0",
+                                color: "#f0f0f0",
+                                borderRadius: "4px",
+                                padding: "0.5rem 1rem",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Save
+                        </button>
                     </div>
-            )}
-        </>
-    )
+                </div>
+            </div>
+        )}
+    </>
+);
+
 }
 
 export { AlbumModal };
