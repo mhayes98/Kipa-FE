@@ -5,22 +5,29 @@ import { useAlbumModalContext } from "../../context/AlbumModalContext";
 import { getTracklistByReleaseID, addAlbumToDatabase,
      createUserAlbumConnection, handleUserAlbumButtonClick } from '../../services/AlbumServices';
 
-
 function OwnButton(master) {
     const { username } = useUserAuthContext();
     const { authenticated } = useUserAuthContext();
     const { toggleLoginModalVisibility } = useLoginModalContext();
     const { toggleAlbumModalVisibility, openAlbumModalWithAlbumData } = useAlbumModalContext();
     
-    const userAlbumOnClickDTO = { master, username, authenticated, status: "Own", toggleLoginModalVisibility };
+    //const userAlbumOnClickDTO = { master, username, authenticated, status: "Own", toggleLoginModalVisibility };
+
+    const handleOwnButtonClick = (master) => {
+        if (authenticated) {
+            openAlbumModalWithAlbumData(master)
+        }
+        else {
+            toggleLoginModalVisibility();
+        }
+    }
 
     return (
         <>
         {/* <button className="border-2 border-solid" 
         onClick={() => handleUserAlbumButtonClick(userAlbumOnClickDTO)}>Own</button> */}
             <button className="border-2 border-solid"
-                onClick={() => openAlbumModalWithAlbumData(master)}>Own</button>
-                
+                onClick={() => handleOwnButtonClick(master)}>Own</button>
         </>
     )
 }
