@@ -125,8 +125,8 @@ function AlbumModal() {
                             }}
                         >
                             <ul>
-                                {tracklist.map((track, index) => (
-                                    <li key={index}>{track.title} - {track.duration}</li>
+                                {tracklist && tracklist.map((track, index) => (
+                                    <li key={index}>{index+1}. {track.title} - {track.duration}</li>
                                 ))}
                             </ul>
                         </div>
