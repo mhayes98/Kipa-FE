@@ -54,18 +54,5 @@ function SearchBar() {
         </div>
     );
 }
-
-            //     <ul>
-            //         {masterSearchResults.map((result) => (
-            //             <li key={result.title}>{result.title} + {result.genre}</li>
-            //         ))}
-            //     </ul>
-            // )}
-            // {masterSearchResults.length > 0 && (
-            //     <SearchResultsCard {...masterSearchResults[0]} />
-            // )}
-            // {masterSearchResults.length > 0 && (
-            //     <SearchResultsCard {...masterSearchResults[1]} />
-            
-
+        
 export default SearchBar;
