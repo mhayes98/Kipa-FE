@@ -8,11 +8,21 @@ function AlbumModal() {
     const { albumModalVisibility, toggleAlbumModalVisibility, master } = useAlbumModalContext();
     // Destrcturing the object to access values directly
     const { artist, thumb, title, year, genre, id } = master;
-    //const { song, duration } = track;
+    const [tracklist, setTracklist] = useState();
 
     // Logs a promise pending object - unable to access tracklist
-    const tracklist = processMasterTracklistResponse(master.id);
-    console.log(tracklist);
+    //const tracklist = processMasterTracklistResponse(master.id);
+    //console.log( tracklist);
+
+    useEffect(() => {
+        async function getTracklist() {
+            const tracklistResponse = await processMasterTracklistResponse(master.id);
+            console.log(tracklistResponse);
+            setTracklist(tracklistResponse);
+        }
+
+        getTracklist();
+    }, [master.id]);
 
 
     // Close modal on ESC
@@ -26,7 +36,7 @@ function AlbumModal() {
 
 
 
-    return (
+   return (
     <>
         {albumModalVisibility && (
             <div
@@ -49,19 +59,18 @@ function AlbumModal() {
                         color: "#f0f0f0",
                         padding: "2rem",
                         borderRadius: "12px",
-                        width: "90%",
-                        maxWidth: "500px",
+                        width: "95%",
+                        maxWidth: "700px",
                         maxHeight: "90vh",
                         overflowY: "auto",
                         position: "relative",
                         display: "flex",
                         flexDirection: "column",
                         gap: "1rem",
-                        boxShadow: "0 8px 20px rgba(0,0,0,0.5)", // subtle shadow around modal
-                        border: "1px solid #3a3a3a", // optional subtle border
+                        boxShadow: "0 8px 20px rgba(0,0,0,0.5)",
+                        border: "1px solid #3a3a3a",
                     }}
                 >
-                    {/* Close button */}
                     <button
                         style={{
                             position: "absolute",
@@ -78,15 +87,13 @@ function AlbumModal() {
                         X
                     </button>
 
-                    {/* Top row: Album art + Track list */}
                     <div
                         style={{
                             display: "flex",
                             gap: "1rem",
                         }}
                     >
-                        {/* Album art + info below */}
-                        <div style={{ flex: "0 0 200px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        <div style={{ flex: "0 0 220px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <img
                                 src={thumb}
                                 alt={title}
@@ -94,8 +101,8 @@ function AlbumModal() {
                                     width: "100%",
                                     height: "auto",
                                     borderRadius: "8px",
-                                    border: "2px solid #555", // subtle border around cover
-                                    boxShadow: "0 4px 12px rgba(0,0,0,0.4)", // slight depth
+                                    border: "2px solid #555",
+                                    boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
                                     padding: "2px",
                                 }}
                             />
@@ -106,7 +113,6 @@ function AlbumModal() {
                             <h4 style={{ marginTop: "0.5rem", fontWeight: "normal", textAlign: "center" }}>{genre}</h4>
                         </div>
 
-                        {/* Track list */}
                         <div
                             style={{
                                 flex: "1 1 auto",
@@ -119,14 +125,13 @@ function AlbumModal() {
                             }}
                         >
                             <ul>
-                                {/* {tracklist.map((song, index) => (
-                                    <li key={index}>{song}</li>
-                                ))} */}
+                                {tracklist.map((track, index) => (
+                                    <li key={index}>{track.title} - {track.duration}</li>
+                                ))}
                             </ul>
                         </div>
                     </div>
 
-                    {/* Tags */}
                     <div
                         style={{
                             display: "flex",
@@ -137,7 +142,6 @@ function AlbumModal() {
                         <p>Placeholder - TagTextBox</p>
                     </div>
 
-                    {/* Notes */}
                     <textarea
                         placeholder="Notes"
                         style={{
@@ -152,7 +156,6 @@ function AlbumModal() {
                         }}
                     />
 
-                    {/* Save button */}
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
                         <button
                             style={{
@@ -172,7 +175,6 @@ function AlbumModal() {
         )}
     </>
 );
-
 }
 
 export { AlbumModal };
