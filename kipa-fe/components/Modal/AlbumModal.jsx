@@ -10,7 +10,7 @@ function AlbumModal() {
     // Destrcturing the object to access values directly
     const { artist, thumb, title, year, genre, id } = master;
     const [tracklist, setTracklist] = useState();
-    const [tags, setTags] = useState();
+    const [tags, setTags] = useState([]);
 
     useEffect(() => {
         async function getTracklist() {
@@ -33,7 +33,7 @@ function AlbumModal() {
 
 
     function checkExistingTag(tag) {
-        return tags.contains(tag);
+        return tags.includes(tag);
     }
     
     function addTagToList(tag) {
@@ -41,7 +41,6 @@ function AlbumModal() {
         if (!checkExistingTag(tag)){
             tags.push(tag);
         }
-        console.log("TAGS: " + tags);
     }
 
     function removeTagFromList(tag) {
@@ -52,8 +51,9 @@ function AlbumModal() {
         }
     }
 
-    const handleDropdownResponse = (tag) => {
-        console.log("RESPONSE : " + tag);
+    const handleDropdownSelection = (tag) => {
+        addTagToList(tag);
+        console.log(tags);
     }
     
 
@@ -161,7 +161,7 @@ function AlbumModal() {
                             gap: "0.5rem",
                         }}
                     >
-                        <TagButton onChange={handleDropdownResponse}></TagButton>
+                        <TagButton onSelection={handleDropdownSelection}></TagButton>
                     </div>
 
                     <textarea
