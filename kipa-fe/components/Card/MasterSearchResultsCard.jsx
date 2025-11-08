@@ -10,8 +10,8 @@ function MasterSearchResultsCard({ master }) {
             <div className="border-2 border-solid">
                 <h1>{artist}</h1>
                 <img src={thumb}/>
-                <WantButton{...master}/>
                 <OwnButton{...master}/>
+                <WantButton{...master}/>
                 <h4>{title} - {year}</h4>
             </div>
         </>
