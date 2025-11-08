@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAlbumModalContext } from "../../context/AlbumModalContext";
 import { processMasterTracklistResponse, getMasterTracklist } from "../../services/SearchServices";
 import TagButton from "../Button/TagButton";
+import { TagLabel } from "../Label/TagLabel";
 
 function AlbumModal() {
     const { albumModalVisibility, toggleAlbumModalVisibility, master } = useAlbumModalContext();
@@ -39,24 +40,23 @@ function AlbumModal() {
     function addTagToList(tag) {
         // Make sure tag is not already in list prior to adding it
         if (!checkExistingTag(tag)){
-            tags.push(tag);
+            const arr = [...tags];
+            arr.push(tag);
+            setTags(arr);
         }
     }
 
     function removeTagFromList(tag) {
         // Make sure tag exists in list prior to removal attempt
         if (checkExistingTag(tag)) {
-            let index = tags.indexOf(tag);
-            tags.splice(index, 1);
+            const arr = tags.filter((i) => i != tag);
+            setTags(arr);
         }
     }
 
     const handleDropdownSelection = (tag) => {
         addTagToList(tag);
-        console.log(tags);
     }
-    
-
 
    return (
     <>
@@ -162,6 +162,9 @@ function AlbumModal() {
                         }}
                     >
                         <TagButton onSelection={handleDropdownSelection}></TagButton>
+                        {tags.map((tag) => (
+                            <TagLabel tag={tag} onDeletion={removeTagFromList}/>
+                        ))}
                     </div>
 
                     <textarea
