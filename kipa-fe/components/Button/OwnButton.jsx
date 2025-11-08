@@ -25,8 +25,6 @@ function OwnButton(master) {
 
     return (
         <>
-        {/* <button className="border-2 border-solid" 
-        onClick={() => handleUserAlbumButtonClick(userAlbumOnClickDTO)}>Own</button> */}
             <button className="border-2 border-solid"
                 onClick={() => handleOwnButtonClick(master)}>Own</button>
         </>
