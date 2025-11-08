@@ -10,8 +10,6 @@ function OwnButton(master) {
     const { authenticated } = useUserAuthContext();
     const { toggleLoginModalVisibility } = useLoginModalContext();
     const { toggleAlbumModalVisibility, openAlbumModalWithAlbumData } = useAlbumModalContext();
-    
-    //const userAlbumOnClickDTO = { master, username, authenticated, status: "Own", toggleLoginModalVisibility };
 
     const handleOwnButtonClick = (master) => {
         if (authenticated) {
