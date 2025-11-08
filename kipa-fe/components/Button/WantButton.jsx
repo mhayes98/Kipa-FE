@@ -1,20 +1,27 @@
 import React from 'react';
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { useUserAuthContext } from "../../context/UserAuthContext";
-import { handleUserAlbumButtonClick } from '../../services/AlbumServices';
-
+import { useAlbumModalContext } from "../../context/AlbumModalContext";
 
 function WantButton(master) {
-    const { username } = useUserAuthContext();
-    const { isAuthenticated } = useUserAuthContext();
+    const { authenticated } = useUserAuthContext();
     const { toggleLoginModalVisibility } = useLoginModalContext();
+    const { toggleAlbumModalVisibility, openAlbumModalWithAlbumData } = useAlbumModalContext();
 
-    const userAlbumOnClickDTO = { master, username, isAuthenticated, status: "Want", toggleLoginModalVisibility };
+    const handleWantButtonClick = (master) => {
+        if (authenticated) {
+            const master_with_status = {...master, status: "Want"};
+            openAlbumModalWithAlbumData(master_with_status);
+        }
+        else {
+            toggleLoginModalVisibility();
+        }
+    }
 
     return (
             <>
             <button className="border-2 border-solid" 
-            onClick={() => handleUserAlbumButtonClick(userAlbumOnClickDTO)}>Want</button>
+            onClick={() => handleWantButtonClick(master)}>Want</button>
             </>
         )
 }
