@@ -4,11 +4,6 @@ import { useState } from "react";
 export default function TagButton({onSelection}) {
     const [hover, setHover] = useState(false);
 
-    // function handleDropdrownSelection(e) {
-    //     console.log(e.target.value);
-    //     handleDropdownResponse();
-    // }
-
     const handleSelection = (e) => {
         onSelection(e.target.value);
     }
