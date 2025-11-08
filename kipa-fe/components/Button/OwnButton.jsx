@@ -2,8 +2,6 @@ import React from 'react';
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { useUserAuthContext } from "../../context/UserAuthContext";
 import { useAlbumModalContext } from "../../context/AlbumModalContext";
-import { getTracklistByReleaseID, addAlbumToDatabase,
-     createUserAlbumConnection, handleUserAlbumButtonClick } from '../../services/AlbumServices';
 
 function OwnButton(master) {
     const { username } = useUserAuthContext();
@@ -14,7 +12,7 @@ function OwnButton(master) {
     const handleOwnButtonClick = (master) => {
         if (authenticated) {
             const master_with_status = {...master, status: "Own"};
-            openAlbumModalWithAlbumData(master_with_status)
+            openAlbumModalWithAlbumData(master_with_status);
         }
         else {
             toggleLoginModalVisibility();
