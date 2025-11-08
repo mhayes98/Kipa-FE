@@ -9,14 +9,17 @@ import { TagLabel } from "../Label/TagLabel";
 function AlbumModal() {
     const { albumModalVisibility, toggleAlbumModalVisibility, master } = useAlbumModalContext();
     // Destrcturing the object to access values directly
-    const { artist, thumb, title, year, genre, id } = master;
+    const { artist, thumb, title, year, genre, id, status } = master;
     const [tracklist, setTracklist] = useState();
     const [tags, setTags] = useState([]);
+
+    let master_with_tracklist = [];
 
     useEffect(() => {
         async function getTracklist() {
             const tracklistResponse = await processMasterTracklistResponse(master.id);
             setTracklist(tracklistResponse);
+            master_with_tracklist = {...master, tracklist: tracklistResponse};
         }
 
         getTracklist();

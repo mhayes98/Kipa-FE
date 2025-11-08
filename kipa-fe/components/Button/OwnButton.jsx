@@ -15,7 +15,8 @@ function OwnButton(master) {
 
     const handleOwnButtonClick = (master) => {
         if (authenticated) {
-            openAlbumModalWithAlbumData(master)
+            const master_with_status = {...master, status: "Own"};
+            openAlbumModalWithAlbumData(master_with_status)
         }
         else {
             toggleLoginModalVisibility();
