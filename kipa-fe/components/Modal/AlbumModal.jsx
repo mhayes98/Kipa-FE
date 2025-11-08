@@ -3,21 +3,18 @@ import React, { useEffect, useRef, useState } from "react";
 // import { Notes } from "../../components/TextBox";
 import { useAlbumModalContext } from "../../context/AlbumModalContext";
 import { processMasterTracklistResponse, getMasterTracklist } from "../../services/SearchServices";
+import TagButton from "../Button/TagButton";
 
 function AlbumModal() {
     const { albumModalVisibility, toggleAlbumModalVisibility, master } = useAlbumModalContext();
     // Destrcturing the object to access values directly
     const { artist, thumb, title, year, genre, id } = master;
     const [tracklist, setTracklist] = useState();
-
-    // Logs a promise pending object - unable to access tracklist
-    //const tracklist = processMasterTracklistResponse(master.id);
-    //console.log( tracklist);
+    const [tags, setTags] = useState();
 
     useEffect(() => {
         async function getTracklist() {
             const tracklistResponse = await processMasterTracklistResponse(master.id);
-            console.log(tracklistResponse);
             setTracklist(tracklistResponse);
         }
 
@@ -34,6 +31,31 @@ function AlbumModal() {
         return () => window.removeEventListener("keydown", handleEsc);
     }, [toggleAlbumModalVisibility]);
 
+
+    function checkExistingTag(tag) {
+        return tags.contains(tag);
+    }
+    
+    function addTagToList(tag) {
+        // Make sure tag is not already in list prior to adding it
+        if (!checkExistingTag(tag)){
+            tags.push(tag);
+        }
+        console.log("TAGS: " + tags);
+    }
+
+    function removeTagFromList(tag) {
+        // Make sure tag exists in list prior to removal attempt
+        if (checkExistingTag(tag)) {
+            let index = tags.indexOf(tag);
+            tags.splice(index, 1);
+        }
+    }
+
+    const handleDropdownResponse = (tag) => {
+        console.log("RESPONSE : " + tag);
+    }
+    
 
 
    return (
@@ -139,7 +161,7 @@ function AlbumModal() {
                             gap: "0.5rem",
                         }}
                     >
-                        <p>Placeholder - TagTextBox</p>
+                        <TagButton onChange={handleDropdownResponse}></TagButton>
                     </div>
 
                     <textarea
