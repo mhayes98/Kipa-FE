@@ -1,7 +1,7 @@
 import { useState } from "react";
 //import { addTagToList } from "../Modal/AlbumModal";
 
-export default function TagButton({handleDropdownResponse}) {
+export default function TagButton({onSelection}) {
     const [hover, setHover] = useState(false);
 
     // function handleDropdrownSelection(e) {
@@ -10,7 +10,7 @@ export default function TagButton({handleDropdownResponse}) {
     // }
 
     const handleSelection = (e) => {
-        handleDropdownResponse(e.target.value);
+        onSelection(e.target.value);
     }
 
     return (
