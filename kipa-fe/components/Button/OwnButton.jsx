@@ -4,7 +4,6 @@ import { useUserAuthContext } from "../../context/UserAuthContext";
 import { useAlbumModalContext } from "../../context/AlbumModalContext";
 
 function OwnButton(master) {
-    const { username } = useUserAuthContext();
     const { authenticated } = useUserAuthContext();
     const { toggleLoginModalVisibility } = useLoginModalContext();
     const { toggleAlbumModalVisibility, openAlbumModalWithAlbumData } = useAlbumModalContext();
