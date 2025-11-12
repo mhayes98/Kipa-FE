@@ -20,6 +20,7 @@ export const getTracklistByReleaseID = async (id) => {
         return null;
     }
 }
+
 export async function addAlbumToDatabase(master) {
     try {
         const response = await fetch("http://localhost:8080/album", {
@@ -49,14 +50,23 @@ export async function addAlbumToDatabase(master) {
 }
 
 // POST
-export async function createUserAlbumConnection(master, username, status) {
+export async function createUserAlbumConnection(master, personal, id) {
     try {
-        const response = await fetch("http://localhost:8080/user-album", {
+        const response = await fetch("http://localhost:8080/useralbum-save", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                userAlbum: {
+                    id: {
+                        userID: id.userID,
+                        albumID: id.albumID
+                    },
+                    status: personal.status,
+                    tags: personal.tags,
+                    notes: personal.notes
+                },
                 album: {
                     id: master.id,
                     title: master.title,
@@ -65,17 +75,7 @@ export async function createUserAlbumConnection(master, username, status) {
                     genre: master.genre,
                     style: master.style,
                     thumbnail: master.thumb,
-                    // Array will processed in the backend and stored as raw text
-                    tracklistAsArray: await getTracklistByReleaseID(master.id)
-                },
-                userAlbum: {
-                    id: {
-                        userID: "testuser",
-                        albumID: master.id
-                    },
-                    status: status,
-                    tags: ["TestTag"],
-                    notes: "Test note"
+                    tracklistAsArray: master.tracklist
                 }
             })
         })
