@@ -5,6 +5,7 @@ import { useAlbumModalContext } from "../../context/AlbumModalContext";
 import { processMasterTracklistResponse, getMasterTracklist } from "../../services/SearchServices";
 import TagButton from "../Button/TagButton";
 import { TagLabel } from "../Label/TagLabel";
+import { SaveButton } from "../Button/SaveButton";
 
 function AlbumModal() {
     const { albumModalVisibility, toggleAlbumModalVisibility, master } = useAlbumModalContext();
@@ -12,19 +13,22 @@ function AlbumModal() {
     const { artist, thumb, title, year, genre, id, status } = master;
     const [tracklist, setTracklist] = useState();
     const [tags, setTags] = useState([]);
-
-    let master_with_tracklist = [];
+    const [notes, setNotes] = useState("");
+    const [masterWithTracklist, setMasterWithTracklist] = useState(null);
 
     useEffect(() => {
         async function getTracklist() {
             const tracklistResponse = await processMasterTracklistResponse(master.id);
             setTracklist(tracklistResponse);
-            master_with_tracklist = {...master, tracklist: tracklistResponse};
+            setMasterWithTracklist({...master, tracklist: tracklistResponse});
         }
 
         getTracklist();
     }, [master.id]);
 
+    const handleNotesChange = (e) => {
+        setNotes(e.target.value);
+    };
 
     // Close modal on ESC
     useEffect(() => {
@@ -39,7 +43,7 @@ function AlbumModal() {
     function checkExistingTag(tag) {
         return tags.includes(tag);
     }
-    
+
     function addTagToList(tag) {
         // Make sure tag is not already in list prior to adding it
         if (!checkExistingTag(tag)){
@@ -172,6 +176,8 @@ function AlbumModal() {
 
                     <textarea
                         placeholder="Notes"
+                        value = {notes}
+                        onChange = {handleNotesChange}
                         style={{
                             width: "100%",
                             minHeight: "150px",
@@ -183,21 +189,9 @@ function AlbumModal() {
                             resize: "vertical",
                         }}
                     />
-
-                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <button
-                            style={{
-                                background: "none",
-                                border: "1px solid #f0f0f0",
-                                color: "#f0f0f0",
-                                borderRadius: "4px",
-                                padding: "0.5rem 1rem",
-                                cursor: "pointer",
-                            }}
-                        >
-                            Save
-                        </button>
-                    </div>
+                    {masterWithTracklist != null && (
+                        <SaveButton master={masterWithTracklist} tags={tags} notes={notes}/>
+                    )}
                 </div>
             </div>
         )}
