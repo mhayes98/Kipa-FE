@@ -88,6 +88,42 @@ export async function createUserAlbumConnection(master, personal, id) {
     }
 }
 
+export const getUserAlbum = async (userID, albumID) => {
+    try {
+        const response = await fetch(`http://localhost:8080/${userID}/${albumID}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+
+        if (!response.ok) {
+            throw new Error("Fetch UserAlbum failed");
+        } else {
+            const user_album_details = await response.json();
+            return user_album_details;
+        }
+    }
+    catch {
+        console.error("Error: ", error);
+        return null;
+    }
+}
+
+export async function processGetUserAlbumResponse(userID, albumID) {
+    return getUserAlbum(userID, albumID).then((response) => {
+        if (response) {
+           return {
+                userAlbum: response.userAlbum,
+                id: response.userAlbum.id,
+                album: response.album
+           };
+        } else {
+            throw new Error ("Invalid response format");
+        }
+    })
+}
+
 export const handleUserAlbumButtonClick = (userAlbumOnClickDTO) => {
     if (userAlbumOnClickDTO.authenticated) {
         createUserAlbumConnection(userAlbumOnClickDTO.master, 
@@ -142,7 +178,6 @@ export async function processMySavedAlbumsResponse(username) {
         } else {
             throw new error ("Invalid response format");
         }
-    
     })
 }
 
