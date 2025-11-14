@@ -5,6 +5,8 @@ import { UserAuthContextProvider, useUserAuthContext } from "../context/UserAuth
 import { SavedAlbumList } from '../components/List/SavedAlbumsList';
 import AuthPromptView from "../components/View/AuthPromptView";
 import { processMySavedAlbumsResponse } from "../services/AlbumServices";
+import { SavedAlbumModalContextProvider } from "../context/SavedAlbumModalContext";
+import { SavedAlbumModal } from "../components/Modal/SavedAlbumModal";
 
 function Home() {
     const { authenticated, username } = useUserAuthContext();
@@ -12,14 +14,17 @@ function Home() {
 
     return (
         <>
-            <div>
-            {authenticated && (
-                <SavedAlbumList />
-            )}
-            </div>
-            {!authenticated && (
-                <AuthPromptView />
-            )}
+            <SavedAlbumModalContextProvider>
+                <div>
+                {authenticated && (
+                    <SavedAlbumList />
+                )}
+                </div>
+                {!authenticated && (
+                    <AuthPromptView />
+                )}
+                <SavedAlbumModal/>
+            </SavedAlbumModalContextProvider>
         </>
     );
 }
