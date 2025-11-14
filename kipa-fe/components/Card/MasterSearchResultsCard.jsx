@@ -5,6 +5,7 @@ import { OwnButton } from '../Button/OwnButton';
 function MasterSearchResultsCard({ master }) {
     // Destrcturing the object to access values directly
     const { artist, thumb, title, year, status } = master;
+
     return (
         <>
             <div className="border-2 border-solid">
@@ -19,6 +20,3 @@ function MasterSearchResultsCard({ master }) {
 }
 
 export default MasterSearchResultsCard;
-
-
-<> Add a status to master in this page and designate it as 'Want' or 'Own' in the OwnButton component in the Auth check??</>
