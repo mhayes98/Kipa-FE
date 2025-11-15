@@ -29,9 +29,12 @@ function SavedAlbumCard({ album }) {
                 <h1>{title}</h1>
                 <img src={thumbnail}/>
                 <p>{year}</p>
+                <div>
+
                 {checkHot(tags) && (
                             <p>🔥</p>
                         )}
+                </div>
                 <p>{notes}</p>
             </div>
         </>
