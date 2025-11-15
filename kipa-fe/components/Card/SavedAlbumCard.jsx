@@ -18,6 +18,10 @@ function SavedAlbumCard({ album }) {
     const handleClick = () => {
         openSavedAlbumModalWithUserAlbumData(username, albumID);
     }
+
+    function checkHot(tags) {
+            return tags.includes("Hot🔥")
+        }
     
     return (
         <>
@@ -25,7 +29,9 @@ function SavedAlbumCard({ album }) {
                 <h1>{title}</h1>
                 <img src={thumbnail}/>
                 <p>{year}</p>
-                <p>{tags}</p>
+                {checkHot(tags) && (
+                            <p>🔥</p>
+                        )}
                 <p>{notes}</p>
             </div>
         </>
