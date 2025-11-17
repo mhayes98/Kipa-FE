@@ -26,6 +26,10 @@ function AlbumModal() {
         getTracklist();
     }, [master.id]);
 
+    const handleClose = () => {
+        toggleAlbumModalVisibility();
+    }
+
     const handleNotesChange = (e) => {
         setNotes(e.target.value);
     };
@@ -45,7 +49,6 @@ function AlbumModal() {
     }
 
     function addTagToList(tag) {
-        // Make sure tag is not already in list prior to adding it
         if (!checkExistingTag(tag)){
             const arr = [...tags];
             arr.push(tag);
@@ -54,7 +57,6 @@ function AlbumModal() {
     }
 
     function removeTagFromList(tag) {
-        // Make sure tag exists in list prior to removal attempt
         if (checkExistingTag(tag)) {
             const arr = tags.filter((i) => i != tag);
             setTags(arr);
@@ -101,6 +103,7 @@ function AlbumModal() {
                     }}
                 >
                     <button
+                        onClick={handleClose}
                         style={{
                             position: "absolute",
                             top: "1rem",
