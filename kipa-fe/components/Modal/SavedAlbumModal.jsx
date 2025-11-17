@@ -188,7 +188,7 @@ function SavedAlbumModal() {
                         }}
                     />
                     {userAlbum != null && (
-                        <SaveButton master={album} tags={userAlbum.tags} notes={userAlbum.notes}/>
+                        <SaveButton userAlbum={userAlbum}/>
                     )}
                 </div>
             </div>
