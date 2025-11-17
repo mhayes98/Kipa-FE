@@ -16,10 +16,6 @@ function SavedAlbumModal() {
             id, setId, 
             album, setAlbum } = useSavedAlbumModalContext(); 
 
-
-                <> NEED TO ADD ALBUM CSS / VALUES ! MAYBE COPY OFF AlbumModal
-                    MIGHT NEED TO MOVE SOME FUNCTIONS TO A CENTRAL LOCATION i.e. 'HandleNotes' </>
-
     useEffect(() => {
             const handleEsc = (e) => {
             if (e.key === "Escape" && savedAlbumModalVisibility) toggleSavedAlbumModalVisibility();
