@@ -91,22 +91,22 @@ export async function createUserAlbumConnection(master, personal, id) {
 export async function updateUserAlbum(userAlbum) {
     try {
         const response = await fetch("http://localhost:8080/useralbum-update", {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 id: {
-                        userID: userAlbum.userID,
-                        albumID: userAlbum.albumID
+                        userID: userAlbum.id.userID,
+                        albumID: userAlbum.id.albumID
                     },
+                notes: userAlbum.notes,
                 status: userAlbum.status,
-                tags: userAlbum.tags,
-                notes: userAlbum.notes
+                tags: userAlbum.tags
             })
         })
         if (!response.ok) {
-            throw new Error("Creating UserAlbum failed")
+            throw new Error("Updating UserAlbum failed")
         }
     }
     catch (error) {
