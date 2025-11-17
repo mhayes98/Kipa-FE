@@ -88,6 +88,32 @@ export async function createUserAlbumConnection(master, personal, id) {
     }
 }
 
+export async function updateUserAlbum(userAlbum) {
+    try {
+        const response = await fetch("http://localhost:8080/useralbum-update", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: {
+                        userID: userAlbum.userID,
+                        albumID: userAlbum.albumID
+                    },
+                status: userAlbum.status,
+                tags: userAlbum.tags,
+                notes: userAlbum.notes
+            })
+        })
+        if (!response.ok) {
+            throw new Error("Creating UserAlbum failed")
+        }
+    }
+    catch (error) {
+        console.error("Error: ", error)
+    }
+}
+
 export const getUserAlbum = async (userID, albumID) => {
     try {
         const response = await fetch(`http://localhost:8080/${userID}/${albumID}`, {
