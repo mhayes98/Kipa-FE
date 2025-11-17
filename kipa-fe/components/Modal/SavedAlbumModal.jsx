@@ -33,7 +33,6 @@ function SavedAlbumModal() {
     }
 
     const handleNotesChange = (e) => {
-        userAlbum.notes = (e.target.value);
         setUserAlbum(current => ({...current, notes: e.target.value}));
     };
 
@@ -59,6 +58,10 @@ function SavedAlbumModal() {
 
     const handleDropdownSelection = (tag) => {
         addTagToList(tag);
+    }
+
+    const handleStatusChange = (e) => {
+        setUserAlbum(current => ({...current, status: e.target.value}));
     }
 
     return (
@@ -137,7 +140,10 @@ function SavedAlbumModal() {
                                 {album.title} - {album.year}
                             </h2>
                             <h4 style={{ marginTop: "0.5rem", fontWeight: "normal", textAlign: "center" }}>{album.genre}</h4>
-                            <h4 style={{ marginTop: "0.5rem", fontWeight: "normal", textAlign: "center" }}>{userAlbum.status}</h4>
+                            <select name="statusDropdown" id="statusDropdown" value={userAlbum.status} onChange={handleStatusChange}>
+                                <option value="Own">Own</option>
+                                <option value="Want">Want</option>
+                            </select>
                         </div>
 
                         <div
