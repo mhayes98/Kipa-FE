@@ -1,28 +1,37 @@
 import React from 'react';
 import { useUserAuthContext } from "../../context/UserAuthContext";
-import { createUserAlbumConnection } from '../../services/AlbumServices';
+import { createUserAlbumConnection, updateUserAlbum } from '../../services/AlbumServices';
 
-function SaveButton({master, tags, notes}) {
+function SaveButton({master, tags, notes, userAlbum}) {
     const { username } = useUserAuthContext();
     
-    const id = {
-        userID: username,
-        albumID: master.id
-    };
+    let id = null;
+    let personal = null;
 
-    const personal = {
-        status: master.status,
-        tags: tags,
-        notes: notes
-    }
-
-    if(personal == null) {
-        console.log("T");
+    if (master != null) {
+        id = {
+            userID: username,
+            albumID: master.id
+        };
+    
+        personal = {
+            status: master.status,
+            tags: tags,
+            notes: notes
+        }
     }
 
     const handleSaveButtonClick = () => {
         try {
-            createUserAlbumConnection(master, personal, id);
+            if (userAlbum == null && id != null && personal != null) {
+                createUserAlbumConnection(master, personal, id);
+            }
+            else if (userAlbum != null && id == null && personal == null) {
+                updateUserAlbum(userAlbum);
+            }
+            else {
+                console.log("SaveButton - Edge");
+            }
         }
         catch (error) {
             console.error("Error saving UserAlbum: ", error);
