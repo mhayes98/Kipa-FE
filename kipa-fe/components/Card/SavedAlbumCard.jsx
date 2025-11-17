@@ -30,7 +30,7 @@ function SavedAlbumCard({ album }) {
                 <img src={thumbnail}/>
                 <p>{year}</p>
                 <div>
-
+                <p>{status}</p>
                 {checkHot(tags) && (
                             <p>🔥</p>
                         )}
