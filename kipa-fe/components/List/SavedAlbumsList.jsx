@@ -12,8 +12,9 @@ function SavedAlbumList({results}) {
         const getMySavedAlbums = async() => {
             try {
                 if(authenticated) {
-                    setMySavedAlbums(await processMySavedAlbumsResponse(username));
-                    console.log("TEST");
+                    const albums = await processMySavedAlbumsResponse(username);
+                    albums.sort((a, b) => a.title.localeCompare(b.title));
+                    setMySavedAlbums(albums);
                 }
             }
             catch (error) {
