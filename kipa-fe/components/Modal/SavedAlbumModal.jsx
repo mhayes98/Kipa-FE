@@ -44,7 +44,6 @@ function SavedAlbumModal() {
         if (!checkExistingTag(tag)){
             const arr = [...userAlbum.tags];
             arr.push(tag);
-            console.log(userAlbum.tags);
             setUserAlbum(current => ({...current, tags: arr}));
         }
     }
