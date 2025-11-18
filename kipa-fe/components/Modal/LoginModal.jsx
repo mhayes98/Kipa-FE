@@ -21,9 +21,7 @@ function LoginModal() {
       setUsernameValue(data.username);
       setAuthState(true);
       toggleLoginModalVisibility();
-      console.log(data.message);
-      console.log(username);
-    }
+}
   };
 
   // Close modal on ESC
