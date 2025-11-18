@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useUserAuthContext } from "../../context/UserAuthContext";
 import { createUserAlbumConnection, updateUserAlbum } from '../../services/AlbumServices';
+import { SavedAlbumsContext, useSavedAlbumsContext } from '../../context/SavedAlbumsContext';
 
 function SaveButton({master, tags, notes, userAlbum}) {
     const { username } = useUserAuthContext();
     const [clicked, setClicked] = useState(false);
+    const { albumRefresher, setAlbumRefresher } = useSavedAlbumsContext();
     
     let id = null;
     let personal = null;
@@ -22,17 +24,18 @@ function SaveButton({master, tags, notes, userAlbum}) {
         }
     }
 
-    const handleSaveButtonClick = () => {
+    const handleSaveButtonClick = async () => {
         try {
             if (userAlbum == null && id != null && personal != null) {
-                createUserAlbumConnection(master, personal, id);
+                await createUserAlbumConnection(master, personal, id);
             }
             else if (userAlbum != null && id == null && personal == null) {
-                updateUserAlbum(userAlbum);
+                await updateUserAlbum(userAlbum);
             }
             else {
                 console.log("SaveButton - Edge");
             }
+            setAlbumRefresher(current => current + 1);
             setClicked(true);
             setTimeout(() => setClicked(false), 200);
         }
