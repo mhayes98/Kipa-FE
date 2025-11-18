@@ -3,10 +3,12 @@ import { useUserAuthContext } from "../../context/UserAuthContext";
 import { getMySavedAlbums, processMySavedAlbumsResponse } from '../../services/AlbumServices';
 import { useLoginModalContext } from "../../context/LoginModalContext";
 import { SavedAlbumCard } from '../Card/SavedAlbumCard';
+import { useSavedAlbumsContext } from "../../context/SavedAlbumsContext";
 
 function SavedAlbumList({results}) {
     const { username, authenticated } = useUserAuthContext();
     const [mySavedAlbums, setMySavedAlbums] = React.useState([]);
+    const { albumRefresher, setAlbumRefresher } = useSavedAlbumsContext();
 
     useEffect(() => {
         const getMySavedAlbums = async() => {
@@ -22,7 +24,7 @@ function SavedAlbumList({results}) {
             }
         }
         getMySavedAlbums();
-    }, []);
+    }, [albumRefresher, authenticated, username]);
 
 
     /*  
