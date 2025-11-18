@@ -16,6 +16,11 @@ function AlbumModal() {
     const [notes, setNotes] = useState("");
     const [masterWithTracklist, setMasterWithTracklist] = useState(null);
 
+    function clearModal() {
+        setNotes("");
+        setTags([]);
+    }
+
     useEffect(() => {
         async function getTracklist() {
             const tracklistResponse = await processMasterTracklistResponse(master.id);
@@ -27,6 +32,7 @@ function AlbumModal() {
     }, [master.id]);
 
     const handleClose = () => {
+        clearModal();
         toggleAlbumModalVisibility();
     }
 
@@ -37,7 +43,10 @@ function AlbumModal() {
     // Close modal on ESC
     useEffect(() => {
         const handleEsc = (e) => {
-        if (e.key === "Escape" && albumModalVisibility) toggleAlbumModalVisibility();
+        if (e.key === "Escape" && albumModalVisibility) {
+            clearModal();
+            toggleAlbumModalVisibility();
+        }
     };
         window.addEventListener("keydown", handleEsc);
         return () => window.removeEventListener("keydown", handleEsc);
