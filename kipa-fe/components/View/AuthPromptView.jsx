@@ -5,6 +5,7 @@ import { NavLink } from 'react-router';
 function AuthPromptView() {
     const { toggleLoginModalVisibility } = useLoginModalContext();
 
+
     return (
         <>
             <h2>Login to view your collection!</h2>
