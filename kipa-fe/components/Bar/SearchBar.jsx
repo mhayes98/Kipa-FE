@@ -16,6 +16,9 @@ function SearchBar() {
             if (event.target.artist.checked) {
                 setArtistSearchResults(await processArtistSearchResponse(searchQuery));
             }
+            else {
+                setArtistSearchResults([]);
+            }
             setMasterSearchResults(await processMasterSearchResponse(searchQuery));
         }
         catch (error) {
